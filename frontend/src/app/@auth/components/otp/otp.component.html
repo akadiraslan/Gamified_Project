@@ -1,0 +1,24 @@
+
+
+<ng-container>
+    <h1 id="title-otp" class="title">Otp</h1>
+    <p class="sub-title">Hello! Log in with your email.</p>
+
+    <div aria-labelledby="title" [formGroup]="otpForm">
+        <div class="form-control-group">
+            <label>Otp :</label>
+            <input nbInput fullWidth id="input-otp" formControlName="otp" status="info" [attr.aria-invalid]="otp.invalid && otp.touched ? true : null" placeholder="Otp">
+            <ngx-validation-message label="Otp" [showPattern]="otp?.hasError('pattern') && otp.touched" [showRequired]="otp?.errors?.required && otp.touched"></ngx-validation-message>
+        </div>
+
+
+        <button nbButton fullWidth status="info" size="large" (click)="onSubmit()" [disabled]="!otpForm.valid" [class.btn-pulse]="submittedOtp">
+            Send Otp
+        </button>
+
+    </div>
+</ng-container>
+
+<section class="another-action" aria-label="Register">
+    Don't have an account? <a class="text-link" routerLink="../register">Register</a>
+</section>

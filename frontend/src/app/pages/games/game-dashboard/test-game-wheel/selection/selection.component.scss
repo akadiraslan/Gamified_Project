@@ -1,0 +1,19 @@
+@import "../../../../../@theme/styles/themes";
+@include nb-install-component() {
+    .closed {
+        background: #ffffff;
+    }
+    .show {
+        opacity: 1;
+    }
+    .hide {
+        opacity: 0;
+    }
+    .option-item {
+        margin-top: 1rem;
+        padding: 1rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+    }
+}

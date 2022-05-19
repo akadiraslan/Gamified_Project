@@ -1,0 +1,33 @@
+@import '../../@theme/styles/themes';
+@include nb-install-component() {
+    nb-card {
+        max-width: 600px;
+        max-height: 500px;
+    }
+    nb-card-header {
+        text-align: center;
+    }
+    .appearance-hero {
+        text-transform: none !important;
+    }
+    .appearance-hero {
+        text-transform: none !important;
+    }
+    .dismiss {
+        margin-right: 5vh
+    }
+    .dismiss-upload {
+        text-align: center;
+    }
+    .game-created {
+        justify-content: center;
+    }
+    .icon-check {
+        float: right;
+        color: #0095ff;
+        margin-right: 2vh;
+    }
+    .text-game-created {
+        color: #0095ff;
+    }
+}

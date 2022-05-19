@@ -1,0 +1,26 @@
+<div *ngIf="isChoice" class="col-md-8 offset-md-2" [ngClass]="{show: opacityDelay, hide: !opacityDelay}">
+    <nb-radio-group [(ngModel)]="option" (ngModelChange)="changeOption($event)">
+        <nb-radio [@wrongAnswer]="{value:animationShake[k] ? 'open':'closed'}" class="option-item"
+            [@trueAnswer]="{value:trueState[k] ? 'open':'closed'}"
+            [@bounceIn]="{ value: animationState, params: { duration: 1000, delay: (k*500)+getDelay() } }"
+            *ngFor="let option of questionOption.option;let k = index" [value]="option.id" [disabled]="disabled[k]"
+            [@bounceIn]="{ value: trueState[k], params: { duration: 1500 } }"
+            [@shake]="{ value: animationShake[k], params: { duration: 1000 } }">
+            <div class="col-md-12">
+                <ng-container *ngIf="option.media_image_id !== 0; else noMedia">
+                    <div class="text-center">
+                        <nb-card>
+                            <nb-card-body>
+                                <img class="rounded mx-auto d-block" style="max-height: 150px"
+                                    src="{{baseUrl}}{{option.media.directory}}" />
+                            </nb-card-body>
+                        </nb-card>
+                    </div>
+                </ng-container>
+
+                <ng-template #noMedia>{{option.name}}</ng-template>
+            </div>
+        </nb-radio>
+
+    </nb-radio-group>
+</div>

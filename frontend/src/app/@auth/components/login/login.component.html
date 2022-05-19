@@ -1,0 +1,37 @@
+<ng-container *ngIf="formPost">
+    <h1 id="title" class="title">Login</h1>
+    <p class="sub-title">Hello! Log in with your email.</p>
+
+    <div [formGroup]="loginForm" aria-labelledby="title">
+        <div class="form-control-group">
+            <label>Email address:</label>
+            <input nbInput fullWidth id="input-email" formControlName="email" status="info" [attr.aria-invalid]="email.invalid && email.touched ? true : null" placeholder="Email address">
+            <ngx-validation-message label="Email address" [showPattern]="email?.hasError('pattern') && email.touched" [showRequired]="email?.errors?.required && email.touched"></ngx-validation-message>
+        </div>
+
+        <div class="form-control-group">
+            <span class="label-with-link">
+                <label class="label">Password:</label>
+                <a class="forgot-password caption-2" routerLink="../request-password">Forgot Password?</a>
+            </span>
+            <input nbInput fullWidth id="input-password" formControlName="password" type="password" status="info" placeholder="Password">
+            <ngx-validation-message label="Password" [showMinLength]="password?.hasError('minlength') && password.touched" [showMaxLength]="password?.hasError('maxlength') && password.touched" [showRequired]="password?.errors?.required && password.touched" [minLength]="minLength"
+                [maxLength]="maxLength"></ngx-validation-message>
+        </div>
+
+        <div class="form-control-group accept-group">
+            <nb-checkbox formControlName="rememberMe" name="rememberMe" *ngIf="rememberMe">Remember me</nb-checkbox>
+        </div>
+
+        <button nbButton fullWidth status="info" size="large" (click)="login()" [disabled]="submitted || !loginForm.valid" [class.btn-pulse]="submitted">
+            Log In
+        </button>
+    </div>
+
+
+</ng-container>
+
+
+<section class="another-action" aria-label="Register">
+    Don't have an account? <a class="text-link" routerLink="../register">Register</a>
+</section>

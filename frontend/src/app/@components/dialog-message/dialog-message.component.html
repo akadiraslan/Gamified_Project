@@ -1,0 +1,244 @@
+<nb-card *ngIf="case === 'question'">
+    <nb-card-header>{{'warnings.Warning' | translate}}</nb-card-header>
+    <nb-card-body>
+        {{'warnings.Do you want to remove this question' | translate}}
+    </nb-card-body>
+    <nb-card-footer>
+        <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="dismiss()">{{'web.Dismiss
+            Dialog' | translate}}
+        </button>
+        <button shape="semi-round" nbButton hero status="danger" (click)="removeFile()">{{'games.Remove Question'|
+            translate}}</button>
+    </nb-card-footer>
+</nb-card>
+
+
+<nb-card *ngIf="case === 'multipleOption'">
+    <nb-card-header>{{'warnings.Warning' | translate}}</nb-card-header>
+    <nb-card-body>
+        {{'warnings.Do you want to remove this option' | translate}}
+    </nb-card-body>
+    <nb-card-footer>
+        <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="dismiss()">{{'web.Dismiss
+            Dialog' | translate}}
+        </button>
+        <button shape="semi-round" nbButton hero status="danger" (click)="removeFile()">
+            {{'games.Remove Option'| translate}}</button>
+    </nb-card-footer>
+</nb-card>
+
+<nb-card *ngIf="case === 'pairingOption'">
+    <nb-card-header>{{'warnings.Warning' | translate}}</nb-card-header>
+    <nb-card-body>
+        {{'warnings.Do you want to remove this option' | translate}}
+    </nb-card-body>
+    <nb-card-footer>
+        <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="dismiss()">{{'web.Dismiss
+            Dialog' | translate}}
+        </button>
+        <button shape="semi-round" nbButton hero status="danger" (click)="removeFile()">{{'games.Remove Option'|
+            translate}}</button>
+    </nb-card-footer>
+</nb-card>
+
+<nb-card *ngIf="case === 'gift'">
+    <nb-card-header>{{'warnings.Warning' | translate}}</nb-card-header>
+    <nb-card-body>
+        {{'warnings.Do you want to remove this gift' | translate}}
+    </nb-card-body>
+    <nb-card-footer>
+        <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="dismiss()">{{'web.Dismiss
+            Dialog' | translate}}
+        </button>
+        <button class="remove-file" shape="semi-round" nbButton status="danger" (click)="removeFile()">{{'gifts.Delete
+            Gift'| translate}}</button>
+    </nb-card-footer>
+</nb-card>
+
+<nb-card *ngIf="case === 'upload'">
+    <nb-card-header>{{'warnings.Warning' | translate}}</nb-card-header>
+    <nb-card-body>
+        {{'warnings.Max_image_size_1_mb' | translate}}
+    </nb-card-body>
+    <nb-card-footer class="dismiss-upload">
+        <button nbButton hero status="info" shape="semi-round" (click)="dismiss()">{{'web.Dismiss Dialog' | translate}}
+        </button>
+    </nb-card-footer>
+</nb-card>
+
+<nb-card *ngIf="case === 'stepControl'">
+    <nb-card-header>{{'warnings.Warning' | translate}}</nb-card-header>
+    <nb-card-body>
+        {{stepMessage | translate:{'attribute':this.itemNum} }}
+    </nb-card-body>
+    <nb-card-footer class="dismiss-upload">
+        <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="dismiss()">{{'web.Dismiss
+            Dialog' | translate}}
+        </button>
+    </nb-card-footer>
+</nb-card>
+
+<nb-card *ngIf="case === 'submitSuccess'">
+    <nb-card-header>
+        <div class="row">
+            <div class="col-md-10">
+                {{'web.Successful' | translate}}
+            </div>
+            <div class="col-md-2" style="float: right;">
+                <button nbButton ghost status="danger" nbTooltip="{{'web.Close'| translate}}" nbTooltipPlacement="top"
+                    nbTooltipStatus="danger" (click)="dismiss()" routerLink='/games'>
+                    <nb-icon icon="close-outline"></nb-icon>
+                </button>
+            </div>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="row game-created" style="margin-top: 5vh;justify-content: center;">
+            <div>
+                <i class="fas fa-check fa-3x icon-check"></i>
+            </div>
+            <div>
+                <div><span class="text-game-created"> {{'games.Game created succesfully!' | translate}}</span></div>
+                <div><span> {{'games.Now you can test or download this game' | translate}}</span></div>
+            </div>
+        </div>
+    </nb-card-body>
+    <nb-card-footer class="dismiss-upload">
+        <button class="dismiss" nbButton hero shape="semi-round" status="info" (click)="editGame()">
+            {{ 'web.View' | translate}}
+        </button>
+        <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="testGame()">
+            {{'games.Test' | translate}}
+        </button>
+        <button class="dismiss" status="info" nbButton hero status="info" shape="semi-round" (click)="downloadScorm()"
+            nbContextMenuTag="scorm-context-menu" [nbContextMenu]="scormVersion">
+            {{'games.Scorm Package' | translate}}
+        </button>
+        <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="dismiss()" routerLink='/games'>
+            {{'web.Close' | translate}}
+        </button>
+    </nb-card-footer>
+</nb-card>
+
+<nb-card *ngIf="case === 'newPage'">
+    <nb-card-header>{{'warnings.Warning' | translate}}</nb-card-header>
+    <nb-card-body>
+        WARNING: You have unsaved changes. Press Cancel to go back and save these changes, or OK to lose these changes.
+    </nb-card-body>
+    <nb-card-footer class="dismiss-upload">
+        <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="newPage()">Ok
+        </button>
+        <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="dismiss()">Cancel
+        </button>
+    </nb-card-footer>
+</nb-card>
+
+<nb-card *ngIf="case === 'upgrade'">
+    <nb-card-header>
+        <div class="row">
+            <div class="col-md-10">
+                {{'warnings.Warning' | translate}}
+            </div>
+            <div class="col-md-2" style="float: right;">
+                <button nbButton ghost status="danger" nbTooltip="{{'web.Close'| translate}}" nbTooltipPlacement="top"
+                    nbTooltipStatus="danger" (click)="dismiss()" routerLink='/games'>
+                    <nb-icon icon="close-outline"></nb-icon>
+                </button>
+            </div>
+        </div>
+    </nb-card-header>
+    <nb-card-body style="text-align: center;">
+        <div class="col-md-12" style="margin-bottom: 2vh;">
+            <i class="fas fa-8x fa-exclamation" style="color:yellow"></i>
+        </div>
+        <div class="col-md-12">
+            {{'warnings.Upgrade' | translate}}
+        </div>
+    </nb-card-body>
+    <nb-card-footer class="dismiss-upload">
+        <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="upgrade()">{{'Upgrade' |
+            translate}}
+        </button>
+        <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="dismiss()">{{'web.Close' |
+            translate}}
+        </button>
+    </nb-card-footer>
+</nb-card>
+<nb-card *ngIf="case === 'fastGame'">
+    <nb-card-header>{{'warnings.Warning' | translate}}</nb-card-header>
+    <nb-card-body>
+        {{'warnings.You will delete all the questions you have created' | translate}}
+    </nb-card-body>
+    <nb-card-footer>
+        <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="dismiss()">{{'web.Dismiss
+            Dialog' | translate}}
+        </button>
+        <button shape="semi-round" nbButton hero status="danger" (click)="removeFile()">
+            {{'games.Delete All Questions'| translate}}</button>
+    </nb-card-footer>
+</nb-card>
+
+<nb-card *ngIf="case === 'user'">
+    <nb-card-header>{{'warnings.Warning' | translate}}</nb-card-header>
+    <nb-card-body>
+        {{'warnings.Do you want to remove this user' | translate}}
+    </nb-card-body>
+    <nb-card-footer>
+        <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="dismiss()">{{'web.Dismiss
+            Dialog' | translate}}
+        </button>
+        <button shape="semi-round" nbButton hero status="danger" (click)="removeFile()">{{'games.Remove User'|
+            translate}}</button>
+    </nb-card-footer>
+</nb-card>
+
+<nb-card *ngIf="case === 'address'">
+    <nb-card-header>{{'warnings.Warning' | translate}}</nb-card-header>
+    <nb-card-body>
+        {{'warnings.Do you want to remove this address' | translate}}
+    </nb-card-body>
+    <nb-card-footer>
+        <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="dismiss()">{{'web.Dismiss
+            Dialog' | translate}}
+        </button>
+        <button shape="semi-round" nbButton hero status="danger" (click)="removeFile()">{{'ACCOUNT.REMOVE_ADDRESS' |
+            translate}}</button>
+    </nb-card-footer>
+</nb-card>
+
+<nb-card *ngIf="case === 'creditCard'">
+    <nb-card-header>{{'warnings.Warning' | translate}}</nb-card-header>
+    <nb-card-body>
+        {{'warnings.Do you want to remove this address' | translate}}
+    </nb-card-body>
+    <nb-card-footer>
+        <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="dismiss()">{{'web.Dismiss
+            Dialog' | translate}}
+        </button>
+        <button shape="semi-round" nbButton hero status="danger" (click)="removeFile()">{{'PAYMENT.REMOVE_CREDIT_CARD' |
+            translate}}</button>
+    </nb-card-footer>
+</nb-card>
+
+<nb-card *ngIf="case === 'packageControl'">
+    <nb-card-header>{{'games.Scorm Package' | translate}}</nb-card-header>
+    <nb-card-body>
+        {{'warnings.Choose_scorm_package' | translate}}
+    </nb-card-body>
+    <nb-card-footer style="text-align: center;">
+        <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="dismiss()">{{'web.Close' |
+            translate}}
+        </button>
+    </nb-card-footer>
+</nb-card>
+<nb-card *ngIf="case === 'packageMessage'">
+    <nb-card-header>{{'games.Scorm Package' | translate}}</nb-card-header>
+    <nb-card-body>
+        {{stepMessage}}
+    </nb-card-body>
+    <nb-card-footer style="text-align: center;">
+        <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="dismiss()">{{'web.Close' |
+            translate}}
+        </button>
+    </nb-card-footer>
+</nb-card>

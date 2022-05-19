@@ -1,0 +1,26 @@
+@import "../../../../../@theme/styles/themes";
+@include nb-install-component() {
+    .show {
+        opacity: 1;
+        transition: opacity 1s;
+    }
+    .hide {
+        opacity: 0;
+        transition: opacity 1s;
+    }
+    .option-item {
+        margin-top: 1rem;
+        padding: 1rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+    }
+}
+
+::ng-deep .outer-circle {
+    left: 15px !important;
+}
+
+::ng-deep .inner-circle {
+    left: 15px !important;
+}

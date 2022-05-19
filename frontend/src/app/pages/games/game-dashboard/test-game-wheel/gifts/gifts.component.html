@@ -1,0 +1,26 @@
+<nb-card-body>
+    <div class="col-md-12" style="text-align: center;">
+        {{this.giftIndex+1}}
+    </div>
+    <div class="row" style="margin-top:5vh">
+        <div class="col-md-2" style="margin-top:5vh">
+            <button nbButton ghost status="info" (click)="setGift('previous')">
+                <nb-icon icon="arrow-ios-back-outline"></nb-icon>
+            </button>
+        </div>
+        <div class="col-md-8">
+
+            <div *ngIf="imageDirectory" class="col-md-12" style="text-align: center;">
+                <img [@flip]="animationState" class="rounded mx-auto d-block" height="150" width="300" src="{{baseUrl}}{{imageDirectory}}" />
+            </div>
+            <div class="col-md-12" style="text-align: center;" [@tada]="{ value: animationState, params: {  delay: 1000 } }">
+                {{giftItems[this.giftIndex].name}}
+            </div>
+        </div>
+        <div class="col-md-2" style="margin-top:5vh">
+            <button nbButton ghost status="info" (click)="setGift('next')">
+                <nb-icon icon="arrow-ios-forward-outline"></nb-icon>
+            </button>
+        </div>
+    </div>
+</nb-card-body>

@@ -1,0 +1,36 @@
+<nb-card>
+    <nb-card-header>
+        <div class="row">
+            <div class="col-md-9">
+                Game Charts
+            </div>
+            <div class="col-md-3">
+                <nb-select status="info" [selected]="charts[0]?.id" shape="semi-round" fullWidth (selectedChange)="changeChart($event)">
+                    <nb-option *ngFor="let chart of charts" [value]="chart?.id">
+                        {{chart.name }}</nb-option>
+                </nb-select>
+            </div>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <div *ngIf="case==='barChart'" class="col-md-12">
+            <chart style="height: 50vh;" type="bar" [data]="data" [options]="options"></chart>
+        </div>
+        <div *ngIf="case==='barHorizontalChart'">
+            <chart style="height: 50vh;" type="horizontalBar" [data]="data" [options]="options"></chart>
+        </div>
+        <div *ngIf="case==='barAnimationChart'" echarts [options]="options" class="echart"></div>
+        <div *ngIf="case==='lineChart'" echarts [options]="options" class="echart"></div>
+        <div *ngIf="case==='lineAreaChart'">
+            <chart type="line" [data]="data" [options]="options"></chart>
+        </div>
+        <div *ngIf="case==='areaChart'" echarts [options]="options" class="echart"></div>
+        <div *ngIf="case==='scatterChart'">
+            <chart type="line" style="height: 50vh;" [data]="data" [options]="options"></chart>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+
+    </nb-card-footer>
+
+</nb-card>

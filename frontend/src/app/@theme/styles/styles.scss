@@ -1,0 +1,186 @@
+/*!
+ * Copyright (c) Akveo 2019. All Rights Reserved.
+ * Licensed under the Single Application / Multi Application License.
+ * See LICENSE_SINGLE_APP / LICENSE_MULTI_APP in the 'docs' folder for license information on type of purchased license.
+ */
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+// themes - our custom or/and out of the box themes
+@import 'themes';
+// framework component themes (styles tied to theme variables)
+@import '~@nebular/theme/styles/globals';
+@import '~@nebular/auth/styles/all';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/grid';
+// loading progress bar theme
+@import './pace.theme';
+@import './layout';
+@import './overrides';
+// install the framework and custom global styles
+@include nb-install() {
+    // framework global styles
+    @include nb-theme-global();
+    @include nb-auth-global();
+    @include ngx-layout();
+    // loading progress bar
+    @include ngx-pace-theme();
+    @include nb-overrides();
+    .appearance-hero {
+        text-transform: none !important;
+    }
+    .card-no-bg {
+        background-color: transparent;
+        box-shadow: none;
+        border: none;
+    }
+    .logo {
+        padding: 0 !important;
+        img {
+            width: 9rem;
+            min-width: 9rem;
+            margin-left: .75rem;
+        }
+    }
+    /*SIDE MENU*/
+    .menu-items {
+        .menu-item {
+            a {
+                text-transform: uppercase;
+                color: nb-theme(color4);
+                &.active {
+                    color: nb-theme(color-primary);
+                    .menu-icon {
+                        color: nb-theme(color-primary);
+                    }
+                }
+                &:hover {
+                    color: nb-theme(color-primary);
+                    .menu-icon {
+                        color: nb-theme(color-primary);
+                    }
+                }
+            }
+        }
+    }
+    /*SG-PAGE-CARD*/
+    .sg-page-card {
+        .sg-page-card-header {
+            padding-top: 0;
+            h1 {
+                font-size: 1.75rem;
+                color: nb-theme(color-primary);
+            }
+        }
+    }
+    .sg-card {
+        border-radius: 12px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+        .sg-card-body {
+            svg {
+                fill: nb-theme(color-primary);
+                width: 4rem;
+            }
+            .button {
+                box-shadow: none !important;
+                svg {
+                    fill: nb-theme(color-white);
+                    width: auto;
+                }
+                &.menu {
+                    background-image: linear-gradient(to right, nb-theme(color-white), nb-theme(color-white));
+                    position: absolute;
+                    right: 0;
+                    svg {
+                        width: auto;
+                        fill: nb-theme(color-primary);
+                    }
+                }
+                &.scorm {
+                    background-image: linear-gradient(to right, nb-theme(color-white), nb-theme(color-white));
+                    border: none;
+                    svg {
+                        width: auto;
+                        fill: nb-theme(color-primary);
+                    }
+                    span {
+                        color: nb-theme(color-primary);
+                        font-size: .65rem;
+                        background: transparent;
+                        white-space: pre-wrap;
+                        line-height: 1.1;
+                        text-align: right;
+                        margin-right: -7px;
+                    }
+                }
+            }
+        }
+        &.add-game {
+            background-color: nb-theme(color-primary);
+            .sg-card-body {
+                svg {
+                    width: 4rem;
+                    margin-bottom: 1rem;
+                    fill: nb-theme(color-white);
+                }
+                .button {
+                    background-image: linear-gradient(to right, nb-theme(color-white), nb-theme(color-white));
+                    color: nb-theme(color3);
+                }
+            }
+            box-shadow: rgba(0,
+            0,
+            0,
+            0.09) 0px 2px 1px,
+            rgba(0,
+            0,
+            0,
+            0.09) 0px 4px 2px,
+            rgba(0,
+            0,
+            0,
+            0.09) 0px 8px 4px,
+            rgba(0,
+            0,
+            0,
+            0.09) 0px 16px 8px,
+            rgba(0,
+            0,
+            0,
+            0.09) 0px 32px 16px;
+            border:none;
+        }
+    }
+    .header-box-file {
+        .search-game {
+            border-radius: 50px;
+            &:hover {
+                background-color: #fff !important;
+            }
+        }
+    }
+    .select-button {
+        padding: .75rem 1rem !important;
+        border: none !important;
+        &:hover {
+            background-color: nb-theme(color-white) !important;
+        }
+    }
+}
+
+::ng-deep .option-list .nb-transition {
+    background-color: #8f9bb3 !important;
+}
+
+nb-accordion-item-header {
+    span {
+        color: nb-theme(color-primary);
+        font-size: 1rem;
+        margin-left: .5rem;
+    }
+}
+
+// .spin-pagination ::ng-deep .ngx-pagination .current {
+//     background: #0095ff;
+// }

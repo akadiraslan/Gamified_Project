@@ -1,0 +1,25 @@
+<ng-container *ngFor="let option of questionOption.option; let k = index">
+    <div [@bounceIn]="{ value: trueState[k], params: { duration: 1500 } }"
+        [@trueAnswer]="{value:trueState[k] ? 'open':'closed'}" [ngClass]="{show: opacityDelay, hide: !opacityDelay}"
+        class="col-md-8 offset-md-2 option-item"
+        [@bounceIn]="{ value: animationState, params: { duration: 1000, delay: (k*500)+getDelay() } }"
+        [@wrongAnswer]="{value:animationShake[k] ? 'open':'closed'}"
+        [@shake]="{ value: animationShake[k], params: { duration: 500 } }" style="margin-top:1vh">
+        <nb-checkbox [(ngModel)]="selectedOption[k]" *ngIf="option.media_image_id !== 0; else noMediaOption"
+            (checkedChange)="onCheckboxChange($event,k)" [disabled]="disabled[k]">
+            <nb-card>
+                <nb-card-body>
+                    <img class="rounded mx-auto d-block" height="150" width="300" style="max-height: 150px"
+                        src="{{baseUrl}}{{option.media.directory}}" />
+                </nb-card-body>
+            </nb-card>
+        </nb-checkbox>
+
+        <ng-template #noMediaOption>
+            <nb-checkbox [(ngModel)]="selectedOption[k]" (checkedChange)="onCheckboxChange($event,k)"
+                [disabled]="disabled[k]">{{option.name}}
+            </nb-checkbox>
+        </ng-template>
+
+    </div>
+</ng-container>

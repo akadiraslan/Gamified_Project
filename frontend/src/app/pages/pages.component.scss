@@ -1,0 +1,26 @@
+@import '../@theme/styles/themes';
+@include nb-install-component() {
+     ::ng-deep router-outlet+* {
+        display: block;
+        animation: fade 1s;
+        @keyframes fade {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    }
+    ::ng-deep .cc-form__button {
+        width: 132px;
+        height: 40px;
+        background: #7028e4 0% 0% no-repeat padding-box !important;
+        border-radius: 21px;
+        text-align: center;
+        font: normal normal bold 12px Open Sans;
+        color: #ffffff !important;
+        display: block;
+        margin: 0 auto;
+    }
+}

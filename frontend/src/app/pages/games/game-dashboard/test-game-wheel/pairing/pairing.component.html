@@ -1,0 +1,52 @@
+<div class="col-md-6 float-left">
+
+    <ng-container *ngFor="let option of firstOption; let k=index">
+        <span class="badge badge-warning">{{k + 1}}</span>
+        <div *ngIf="option.first_image_id !== 0; else noMediaPairingOptionDef">
+            <nb-card class="example-box-1">
+                <nb-card-body>
+                    <img class="rounded mx-auto d-block" height="200" width="200" src="{{baseUrl}}{{option.first_media?.directory}}" />
+                </nb-card-body>
+            </nb-card>
+        </div>
+
+        <ng-template #noMediaPairingOptionDef>
+            <div class="example-box-1">
+                {{option.first_option}}
+            </div>
+        </ng-template>
+    </ng-container>
+
+</div>
+
+
+<div class="col-md-6 float-left" style="position: relative;">
+    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event,secondOption)">
+        <ng-container *ngFor="let option of secondOption; let i=index">
+
+            <ng-container *ngIf="option.second_image_id !== 0; else noMediaPairingOption">
+
+                <div class="example-box" cdkDrag>
+                    <nb-card>
+                        <nb-card-body>
+                            <img class="rounded mx-auto d-block" height="200" width="200" src="{{baseUrl}}{{option.second_media.directory}}" />
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+
+            </ng-container>
+
+            <ng-template #noMediaPairingOption>
+                <div class="example-box" cdkDrag>{{option.second_option}}
+                </div>
+            </ng-template>
+
+        </ng-container>
+    </div>
+</div>
+<!-- <div class="clearfix"></div>
+<div class="col-12 mt-lg-4 ">
+    <button (click)="reply()" nbButton status="primary">{{'web.Send' | translate}}</button>
+    <hr>
+    Score : {{score}}
+</div> -->

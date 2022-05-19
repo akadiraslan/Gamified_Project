@@ -1,0 +1,94 @@
+@import '../../../@theme/styles/themes';
+@import '../../../../../node_modules/bootstrap/scss/mixins/breakpoints';
+@import '../../../../../node_modules/@nebular/theme/styles/global/breakpoints';
+@include nb-install-component() {
+    .st0 {
+        fill: nb-theme(fill-none);
+    }
+    /*SG CARD*/
+    /* .sg-card {
+        .sg-card-body {
+            svg {
+                fill: nb-theme(color-white);
+                width: 4rem;
+            }
+            a.button {
+                background-image: linear-gradient(to right, nb-theme(color-white), nb-theme(color-white));
+                color: nb-theme(color-pink);
+            }
+        }
+        &.add-game {
+            //box-shadow: add-game-shadow;
+            background-color: nb-theme(color2);
+            .sg-card-body {
+                svg {
+                    margin-bottom: 2rem;
+                }
+                a.button {
+                    background-image: linear-gradient(to right, nb-theme(color-white), nb-theme(color-white));
+                    color: nb-theme(color3);
+                }
+            }
+        }
+    }*/
+    /*END SG-CARD*/
+    .header-box-file {
+        justify-content: flex-end;
+        margin-right: 0vh;
+        margin-left: 0vh;
+    }
+    .ng-select.search-game {
+        color: #8f9bb3;
+        font-size: 0.9375rem;
+        font-weight: 400;
+        text-align: left;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 50px;
+        line-height: 1.5rem;
+        font-family: Open Sans, sans-serif;
+        // padding: 0.4375rem 0.2rem 0.4375rem 1.125rem !important;
+        padding: .3rem .5rem !important;
+        position: relative;
+        border-color: transparent;
+        background-color: #f7f9fc;
+    }
+    .shorting-game {
+        button {
+            padding: .3rem .5rem !important;
+            background-color: red;
+        }
+    }
+     ::ng-deep .ng-value-container {
+        padding-left: 0px;
+    }
+     ::ng-deep .ng-select-container {
+        height: 100%;
+        border: none;
+        min-height: 100%;
+        box-shadow: none;
+        background-color: transparent !important;
+    }
+     ::ng-deep .ng-dropdown-panel.ng-select-bottom {
+        margin-top: 6px;
+    }
+     ::ng-deep .ng-input {
+        padding-left: 0px;
+        top: 0px;
+    }
+     ::ng-deep .ng-select-container ng-has-value {
+        box-shadow: none;
+        outline: none;
+    }
+     ::ng-deep .ng-clear-wrapper {
+        color: #8f9bb3;
+        padding-top: 0.5vh;
+    }
+    .header-title {
+        vertical-align: middle;
+    }
+     :host {
+        background: nb-theme(background-basic-color-1);
+        color: nb-theme(color);
+    }
+}
