@@ -38,7 +38,7 @@ export class DashboardComponent extends BaseComponent implements OnInit, OnDestr
         this.spinnerShow();
         const sendData = {
             organisation_id: this.messageService.organisationId ?? null,
-            learner_id: 'anzera'
+
         };
         this.reportService.getLearnerGeneralReport(sendData).subscribe((data: any) => {
             console.log(data);
