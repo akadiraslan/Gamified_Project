@@ -10,7 +10,7 @@ const reportRoutes = require('./routes/report-route');
 const topicRoutes = require('./routes/topic-route');
 const userRoutes = require('./routes/user-route');
 const wildcardRoutes = require('./routes/wildcard-route');
-const getQuestionByTopicService = require('./services/getQuestionsByTopic');
+const testRoutes = require('./routes/test-route')
 
 
 const app = express();
@@ -26,6 +26,7 @@ app.use('/api', reportRoutes.routes);
 app.use('/api', topicRoutes.routes);
 app.use('/api', userRoutes.routes);
 app.use('/api', wildcardRoutes.routes);
+app.use('/api', testRoutes.routes);
 
 app.listen(config.port, () => console.log('App is listening on url http://localhost:' + config.port));
 

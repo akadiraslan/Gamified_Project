@@ -27,8 +27,8 @@ const getAllReports = async (req, res, next) => {
                 const report = new Report(
                     doc.id,
                     doc.data().user_id,
-                    doc.data().topic_id,
-                    doc.data().user_topic_score
+                    doc.data().test_id,
+                    doc.data().score
                 );
                 reportsArray.push(report);
             });
