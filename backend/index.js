@@ -25,6 +25,5 @@ app.use('/api', topicRoutes.routes);
 app.use('/api', userRoutes.routes);
 app.use('/api', wildcardRoutes.routes);
 
-
-
 app.listen(config.port, () => console.log('App is listening on url http://localhost:' + config.port));
+
