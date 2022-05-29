@@ -27,6 +27,7 @@ const getAllQuestions = async (req, res, next) => {
                 const question = new Question(
                     doc.id,
                     doc.data().topic_id,
+                    doc.data().topic_name,
                     doc.data().question_body,
                     doc.data().question_options,
                     doc.data().correct_option
