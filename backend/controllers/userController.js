@@ -8,8 +8,19 @@ const firestore = firebase.firestore();
 const addUser = async (req, res, next) => {
     try {
         const data = req.body;
-        await firestore.collection('users').doc().set(data);
-        res.send('Record saved successfuly');
+        const users = await firestore.collection('users');
+        const getData = await users.get();
+        var flag = true;
+        getData.forEach(doc => {
+            if(data.username == doc.data().username){
+                flag = false
+                return res.send("User already exists with this username");
+            }
+        });
+        if(flag){
+            await firestore.collection('users').doc().set(data);
+            res.send('Record saved successfuly');
+        }
     } catch (error) {
         res.status(400).send(error.message);
     }
@@ -26,6 +37,7 @@ const getAllUsers = async (req, res, next) => {
             data.forEach(doc => {
                 const user = new User(
                     doc.id,
+                    doc.data().email,
                     doc.data().username,
                     doc.data().password,
                     doc.data().biography,
@@ -35,6 +47,29 @@ const getAllUsers = async (req, res, next) => {
                 usersArray.push(user);
             });
             res.send(usersArray);
+        }
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+const userLogin = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const password = req.params.password;
+        const users = await firestore.collection('users');
+        const data = await users.get();
+        var flag = false
+        if(data.empty) {
+            res.status(404).send('No user record found');
+        }else {
+            data.forEach(doc => {
+                if(doc.data().username == id){
+                    if(doc.data().password == password)
+                        flag = true
+                }                
+            });
+            res.send(flag);
         }
     } catch (error) {
         res.status(400).send(error.message);
@@ -55,6 +90,7 @@ const getUser = async (req, res, next) => {
         res.status(400).send(error.message);
     }
 }
+
 
 const updateUser = async (req, res, next) => {
     try {
@@ -82,6 +118,7 @@ module.exports = {
     addUser,
     getAllUsers,
     getUser,
+    userLogin,
     updateUser,
     deleteUser
 }
