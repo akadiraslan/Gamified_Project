@@ -113,10 +113,6 @@ export class NgxRegisterComponent extends BaseComponent implements OnInit {
 
         this.registerForm = this.fb.group({
             name: this.fb.control('', [...loginValidators]),
-            surname: this.fb.control('', [...loginValidators]),
-            phone: this.fb.control(null, [...phoneValidators]),
-            organisationName: this.fb.control('', [...loginValidators]),
-            domainName: this.fb.control('', [...loginValidators]),
             email: this.fb.control('', [...emailValidators]),
             password: this.fb.control('', [...passwordValidators]),
             confirmPassword: this.fb.control('', [...passwordValidators]),
@@ -134,36 +130,38 @@ export class NgxRegisterComponent extends BaseComponent implements OnInit {
         this.errors = this.messages = [];
         this.submitted = true;
         this.spinnerShow();
-        this.authService.signUp(this.registerForm.value).subscribe(
-            (data: any) => {
-                this.submitted = false;
-                this.spinnerHide();
-                if (data.success) {
-                    this.showMessage(
-                        this.translate('title.Registration'),
-                        this.translate(data.message),
-                        SUCCESS,
-                        Route.PUBLIC.LOGIN
-                    );
-                } else {
-                    this.showMessage(
-                        this.translate('title.Registration'),
-                        this.translate(data.message),
-                        ERROR
-                    );
-                }
+        console.log(this.registerForm);
 
-            },
-            error => {
-                this.spinnerHide();
-                this.submitted = false;
-                this.showMessage(
-                    this.translate('title.Registration'),
-                    this.translate(error.error.message),
-                    ERROR
-                );
-            }
-        );
+        // this.authService.signUp(this.registerForm.value).subscribe(
+        //     (data: any) => {
+        //         this.submitted = false;
+        //         this.spinnerHide();
+        //         if (data.success) {
+        //             this.showMessage(
+        //                 this.translate('title.Registration'),
+        //                 this.translate(data.message),
+        //                 SUCCESS,
+        //                 Route.PUBLIC.LOGIN
+        //             );
+        //         } else {
+        //             this.showMessage(
+        //                 this.translate('title.Registration'),
+        //                 this.translate(data.message),
+        //                 ERROR
+        //             );
+        //         }
+
+        //     },
+        //     error => {
+        //         this.spinnerHide();
+        //         this.submitted = false;
+        //         this.showMessage(
+        //             this.translate('title.Registration'),
+        //             this.translate(error.error.message),
+        //             ERROR
+        //         );
+        //     }
+        // );
 
 
     }

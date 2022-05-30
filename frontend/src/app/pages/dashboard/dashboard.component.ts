@@ -5,6 +5,8 @@ import { BaseComponent } from '../../@components/base/base.component';
 import { ChartTypes, DataTypes } from 'app/@core/data/chart';
 import { Types } from 'app/@core/model/report';
 import { MessageService } from 'app/@core/mock/common/message.service';
+import { GameService } from 'app/@core/mock/common/game.service';
+import { ApiService } from 'app/@core/mock/common/api.service';
 
 
 @Component({
@@ -27,11 +29,13 @@ export class DashboardComponent extends BaseComponent implements OnInit, OnDestr
     dataTypes = DataTypes;
 
     constructor(private theme: NbThemeService, private reportService: ReportService,
-        private messageService: MessageService) {
+        private messageService: MessageService, private gameService: GameService,
+        private apiService: ApiService) {
         super();
     }
 
     ngOnInit(): void {
+        this.getReport();
     }
 
     getReport() {
@@ -40,17 +44,9 @@ export class DashboardComponent extends BaseComponent implements OnInit, OnDestr
             organisation_id: this.messageService.organisationId ?? null,
 
         };
-        this.reportService.getLearnerGeneralReport(sendData).subscribe((data: any) => {
+        this.gameService.getExample().subscribe((data: any) => {
             console.log(data);
-            if (data.success) {
-                data.data.learner.forEach(game => {
-                    this.games.push(game.name);
-                    this.totalCorrect.push(game.total_correct);
-                    this.totalWrong.push(game.total_incorrect);
-                    this.totalQuestion.push(game.total_question);
-                });
-                this.getBarChart();
-            }
+
             this.spinnerHide();
         });
     }

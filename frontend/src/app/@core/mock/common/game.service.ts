@@ -18,6 +18,10 @@ export class GameService {
         return this.apiService.post(`${Route.GAMES}`, data).pipe(catchError(this.formatError));
     }
 
+    getExample(): Observable<any> {
+        return this.apiService.get('http://localhost:8080/api/questions').pipe();
+    }
+
     updateGame(gameId: number, data: any): Observable<any> {
         return this.apiService.put(`${Route.GAMES}` + '/' + gameId, data).pipe(catchError(this.formatError));
     }

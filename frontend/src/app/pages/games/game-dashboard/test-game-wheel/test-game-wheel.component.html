@@ -1,6 +1,6 @@
 <!-- <mat-basic-audio-player [audioUrl]="msbapAudioUrl[0]" [autoPlay]="false" muted="muted" [displayVolumeControls]="msaapDisplayVolumeControls">
 </mat-basic-audio-player> -->
-<nb-card id="gamescreen" style="border:none">
+<nb-card id="gamescreen" style="border:none;margin-top:-2rem;">
     <ng-container *ngIf="case==='main'">
         <nb-card-body [ngClass]="{show: opacityDelay, hide: !opacityDelay}">
             <div class="row align-items-center">
@@ -292,28 +292,12 @@
                     {{allCat[categoryIndex][questionIndex].name}}
                 </div>
             </div>
-            <ng-container *ngIf="caseQuestion ==='open-type'">
-                <div class="col-md-8 offset-md-2 mb-2 opentype">
-                    <textarea nbInput fullWidth [(ngModel)]="content" (ngModelChange)="controlOption($event)"
-                        placeholder="Your Comment"></textarea>
-                </div>
-            </ng-container>
-            <ng-container *ngIf="caseQuestion ==='multiple-selection'">
-                <selection (optionEmit)="controlOption($event)" [questionOption]="questionOption">
-                </selection>
-            </ng-container>
             <ng-container *ngIf="caseQuestion ==='multiple-choice'">
                 <choice (optionEmit)="controlOption($event)" [questionOption]="questionOption"></choice>
             </ng-container>
 
             <!--not: aşağıdaki geribildirimler soru cevaplandıktan sonra görünmeli-->
 
-            <ng-container *ngIf="caseQuestion ==='pairing-type'">
-                <div *ngIf="isCorrectAnswer" style="margin-bottom:2vh" class="col-md-12"> {{correctAnswer}} </div>
-                <pairing [questionOption]="questionOption" [options]="question.option" [question_id]="question.id"
-                    [question_type]="question.question_type">
-                </pairing>
-            </ng-container>
             <ng-container *ngIf="isCorrectAnswer && caseQuestion !=='pairing-type'">
                 <div class="col-md-4 offset-md-4 callback" [ngClass]="{show: opacityDelay, hide: !opacityDelay}">
                     <ng-container *ngIf="correctAnswer==='True Answer'">
@@ -332,15 +316,6 @@
                             src="{{baseUrl}}{{imageDirectory}}" />
                     </ng-container>
 
-                    <ng-container *ngIf="imageDirectory &&caseQuestion ==='multiple-selection'"
-                        [@fadeInUp]="{ value: animationState, params: { duration: 1000} }">
-                        <div class="row">
-                            <div class="col-md-3" *ngFor="let image of imageDirectory">
-                                <img class="rounded mx-auto d-block" style="max-height: 100px"
-                                    src="{{baseUrl}}{{image}}" />
-                            </div>
-                        </div>
-                    </ng-container>
                 </div>
             </ng-container>
 

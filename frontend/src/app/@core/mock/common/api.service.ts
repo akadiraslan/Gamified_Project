@@ -24,6 +24,10 @@ export class ApiService {
             'Content-Type': 'application/json'
         })
     };
+    getExample(): Observable<any> {
+        return this.http.get('http://jsonplaceholder.typicode.com/users',
+        ).pipe();
+    }
 
     getOrganisationDomain() {
 
@@ -33,7 +37,7 @@ export class ApiService {
     }
 
     get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
-        return this.http.get(this.url + path, { params }).pipe(catchError(this.formatError));
+        return this.http.get(path).pipe(catchError(this.formatError));
     }
 
     post(path: string, params: HttpParams = new HttpParams()): Observable<any> {

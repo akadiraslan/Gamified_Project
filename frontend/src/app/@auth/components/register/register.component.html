@@ -4,62 +4,44 @@
 <div [formGroup]="registerForm" aria-labelledby="title">
     <div class="form-control-group">
         <label for="input-name">Name:</label>
-        <input nbInput autofocus fullWidth fieldSize="large" id="input-name" formControlName="name" [status]="name.dirty ? (name.invalid  ? 'danger' : 'success') : ''" [attr.aria-invalid]="name.invalid && name.touched ? true : null" placeholder="Name">
-        <ngx-validation-message label="Name" [showMinLength]="name?.hasError('minlength') && name.touched" [showMaxLength]="name?.hasError('maxlength') && name.touched" [minLength]="minNameLength" [maxLength]="maxNameLength" [showRequired]="name?.errors?.required && name.touched">
+        <input nbInput autofocus fullWidth fieldSize="large" id="input-name" formControlName="name"
+            [status]="name.dirty ? (name.invalid  ? 'danger' : 'success') : ''"
+            [attr.aria-invalid]="name.invalid && name.touched ? true : null" placeholder="Name">
+        <ngx-validation-message label="Name" [showMinLength]="name?.hasError('minlength') && name.touched"
+            [showMaxLength]="name?.hasError('maxlength') && name.touched" [minLength]="minNameLength"
+            [maxLength]="maxNameLength" [showRequired]="name?.errors?.required && name.touched">
         </ngx-validation-message>
     </div>
-
-    <div class="form-control-group">
-        <label for="input-name">Surname:</label>
-        <input nbInput autofocus fullWidth fieldSize="large" id="input-surname" formControlName="surname" [status]="surname.dirty ? (surname.invalid  ? 'danger' : 'success') : ''" [attr.aria-invalid]="surname.invalid && surname.touched ? true : null" placeholder="Surname">
-        <ngx-validation-message label="Surname" [showMinLength]="surname?.hasError('minlength') && surname.touched" [showMaxLength]="surname?.hasError('maxlength') && surname.touched" [minLength]="minNameLength" [maxLength]="maxNameLength" [showRequired]="surname?.errors?.required && surname.touched">
-        </ngx-validation-message>
-    </div>
-
-    <div class="form-control-group">
-        <label for="input-name">Organisation Name:</label>
-        <input nbInput autofocus fullWidth fieldSize="large" id="input-organisationName" formControlName="organisationName" [status]="organisationName.dirty ? (organisationName.invalid  ? 'danger' : 'success') : ''" [attr.aria-invalid]="organisationName.invalid && organisationName.touched ? true : null"
-            placeholder="Organisation Name">
-        <ngx-validation-message label="Organisation Name" [showMinLength]="organisationName?.hasError('minlength') && organisationName.touched" [showMaxLength]="organisationName?.hasError('maxlength') && organisationName.touched" [minLength]="minNameLength" [maxLength]="minNameLength"
-            [showRequired]="organisationName?.errors?.required && organisationName.touched">
-        </ngx-validation-message>
-    </div>
-
-    <div class="form-control-group">
-        <label for="input-name">Subdomain Name:</label>
-        <input nbInput autofocus fullWidth fieldSize="large" id="subdomain-name" (blur)="checkDomain()" formControlName="domainName" [status]="domainName.dirty ? (domainName.invalid  ? 'danger' : 'success') : ''" [attr.aria-invalid]="domainName.invalid && domainName.touched ? true : null"
-            placeholder="Domain Name">
-        <ngx-validation-message label="Domain Name" [showMinLength]="domainName?.hasError('minlength') && domainName.touched" [showMaxLength]="domainName?.hasError('maxlength') && domainName.touched" [minLength]="minDomainNameLength" [maxLength]="minDomainNameLength"
-            [showRequired]="domainName?.errors?.required && domainName.touched">
-        </ngx-validation-message>
-    </div>
-
-    <div class="form-control-group">
-        <label for="input-name">Phone:</label>
-        <input nbInput autofocus fullWidth (keypress)="numberOnly($event)" [maxLength]="maxPhoneLength" fieldSize="large" id="input-phone" formControlName="phone" [status]="phone.dirty ? (phone.invalid  ? 'danger' : 'success') : ''" [attr.aria-invalid]="phone.invalid && phone.touched ? true : null"
-            placeholder="Phone">
-        <ngx-validation-message label="Phone" [showMinLength]="phone?.hasError('minlength') && phone.touched" [showMaxLength]="phone?.hasError('maxlength') && phone.touched" [minLength]="minPhoneLength" [maxLength]="maxPhoneLength" [showRequired]="phone?.errors?.required && phone.touched">
-        </ngx-validation-message>
-    </div>
-
     <div class="form-control-group">
         <label for="input-email">Email address:</label>
-        <input nbInput fullWidth fieldSize="large" id="input-email" formControlName="email" [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''" [attr.aria-invalid]="email.invalid && email.touched ? true : null" placeholder="Email address">
-        <ngx-validation-message label="Email address" [showPattern]="email?.hasError('pattern') && email.touched" [showRequired]="email?.errors?.required && email.touched"></ngx-validation-message>
+        <input nbInput fullWidth fieldSize="large" id="input-email" formControlName="email"
+            [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
+            [attr.aria-invalid]="email.invalid && email.touched ? true : null" placeholder="Email address">
+        <ngx-validation-message label="Email address" [showPattern]="email?.hasError('pattern') && email.touched"
+            [showRequired]="email?.errors?.required && email.touched"></ngx-validation-message>
     </div>
 
     <div class="form-control-group">
         <label for="input-password">Password:</label>
-        <input nbInput fullWidth fieldSize="large" id="input-password" formControlName="password" type="password" [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : ''" placeholder="Password">
-        <ngx-validation-message label="Password" [showMinLength]="password?.hasError('minlength') && password.touched" [showMaxLength]="password?.hasError('maxlength') && password.touched" [showRequired]="password?.errors?.required && password.touched" [minLength]="minLength"
+        <input nbInput fullWidth fieldSize="large" id="input-password" formControlName="password" type="password"
+            [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : ''" placeholder="Password">
+        <ngx-validation-message label="Password" [showMinLength]="password?.hasError('minlength') && password.touched"
+            [showMaxLength]="password?.hasError('maxlength') && password.touched"
+            [showRequired]="password?.errors?.required && password.touched" [minLength]="minLength"
             [maxLength]="maxLength"></ngx-validation-message>
     </div>
 
     <div class="form-control-group">
         <label for="input-re-password">Confirm Password:</label>
-        <input nbInput fullWidth fieldSize="large" id="input-re-password" formControlName="confirmPassword" type="password" [status]="confirmPassword.dirty ? (confirmPassword.invalid || password.value != confirmPassword.value  ? 'danger' : 'success') : ''" placeholder="Password">
-        <ngx-validation-message label="Confirm Password" [showMinLength]="confirmPassword?.hasError('minlength') && confirmPassword.touched" [showMaxLength]="confirmPassword?.hasError('maxlength') && confirmPassword.touched" [showRequired]="confirmPassword?.errors?.required && confirmPassword.touched"
-            [minLength]="minLength" [maxLength]="maxLength"></ngx-validation-message>
+        <input nbInput fullWidth fieldSize="large" id="input-re-password" formControlName="confirmPassword"
+            type="password"
+            [status]="confirmPassword.dirty ? (confirmPassword.invalid || password.value != confirmPassword.value  ? 'danger' : 'success') : ''"
+            placeholder="Password">
+        <ngx-validation-message label="Confirm Password"
+            [showMinLength]="confirmPassword?.hasError('minlength') && confirmPassword.touched"
+            [showMaxLength]="confirmPassword?.hasError('maxlength') && confirmPassword.touched"
+            [showRequired]="confirmPassword?.errors?.required && confirmPassword.touched" [minLength]="minLength"
+            [maxLength]="maxLength"></ngx-validation-message>
         <p class="caption status-danger" *ngIf="password.value != confirmPassword.value">
             Password and confirm password does not match!
         </p>

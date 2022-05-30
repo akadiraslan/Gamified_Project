@@ -7,18 +7,8 @@
             [@bounceIn]="{ value: trueState[k], params: { duration: 1500 } }"
             [@shake]="{ value: animationShake[k], params: { duration: 1000 } }">
             <div class="col-md-12">
-                <ng-container *ngIf="option.media_image_id !== 0; else noMedia">
-                    <div class="text-center">
-                        <nb-card>
-                            <nb-card-body>
-                                <img class="rounded mx-auto d-block" style="max-height: 150px"
-                                    src="{{baseUrl}}{{option.media.directory}}" />
-                            </nb-card-body>
-                        </nb-card>
-                    </div>
-                </ng-container>
 
-                <ng-template #noMedia>{{option.name}}</ng-template>
+                <ng-container>{{option.name}}</ng-container>
             </div>
         </nb-radio>
 

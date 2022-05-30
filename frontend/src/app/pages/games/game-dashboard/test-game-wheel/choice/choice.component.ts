@@ -61,6 +61,8 @@ export class ChoiceComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        console.log(this.questionOption);
+
         this.isChoice = true;
         this.animate();
     }
