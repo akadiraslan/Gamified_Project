@@ -1,4 +1,4 @@
-class Answer {
+class User {
     constructor(id, email, username, password, biography, register_date, total_score) {
             this.id = id;
             this.email = email;
@@ -10,4 +10,4 @@ class Answer {
     }
 }
 
-module.exports = Answer;
+module.exports = User;

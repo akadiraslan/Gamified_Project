@@ -12,9 +12,12 @@ const addUser = async (req, res, next) => {
         const getData = await users.get();
         var flag = true;
         getData.forEach(doc => {
-            if(data.username == doc.data().username){
+            if(data.email == doc.data().email){
                 flag = false
-                return res.send("User already exists with this username");
+                return res.send({
+                    response: flag,
+                    errmsg : 'User already exists with this email'
+                });
             }
         });
         if(flag){
@@ -59,17 +62,29 @@ const userLogin = async (req, res, next) => {
         const password = req.params.password;
         const users = await firestore.collection('users');
         const data = await users.get();
+        var user_id;
         var flag = false
         if(data.empty) {
             res.status(404).send('No user record found');
         }else {
             data.forEach(doc => {
-                if(doc.data().username == id){
+                if(doc.data().email == id){
                     if(doc.data().password == password)
                         flag = true
+                        user_id = doc.id;
                 }                
             });
-            res.send(flag);
+            if (flag){
+                res.send(
+                    {
+                        id : user_id,
+                        response : true
+                    }
+                );
+            }else{
+                res.send(flag);
+            }
+            
         }
     } catch (error) {
         res.status(400).send(error.message);
