@@ -109,7 +109,6 @@ export class NgxLoginComponent extends BaseComponent implements OnInit {
             this.spinnerHide();
         });
 
-
     }
 
 }

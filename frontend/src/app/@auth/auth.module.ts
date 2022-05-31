@@ -17,7 +17,6 @@ import {FormsModule} from '@angular/forms';
 
 import {
     NgxLoginComponent,
-    NgxOtpComponent,
     NgxAuthComponent,
     NgxAuthBlockComponent,
     NgxLogoutComponent,
@@ -54,7 +53,6 @@ const COMPONENTS = [
     NgxResetPasswordComponent,
     NgxAuthBlockComponent,
     NgxRegisterConfirmComponent,
-    NgxOtpComponent,
     NgxChangeEmailComponent
 ];
 

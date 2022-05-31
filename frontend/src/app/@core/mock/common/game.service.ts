@@ -26,7 +26,15 @@ export class GameService {
         return this.apiService.get('http://localhost:8080/api/user/' + data.email + '' + '/' + data.password
             + '').pipe();
     }
-    
+
+    getAllTestService(): Observable<any> {
+        return this.apiService.get('http://localhost:8080/api/tests').pipe();
+    }
+
+    getTestService(data): Observable<any> {
+        return this.apiService.get('http://localhost:8080/api/test/' + data + '').pipe();
+    }
+
     registerService(data: any): Observable<any> {
         return this.apiService.post('http://localhost:8080/api/user', data).pipe();
     }

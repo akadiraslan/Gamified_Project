@@ -7,7 +7,7 @@ import {
   NgxLogoutComponent,
   NgxRequestPasswordComponent,
   NgxResetPasswordComponent,
-  NgxRegisterConfirmComponent, NgxOtpComponent, NgxChangeEmailComponent
+  NgxRegisterConfirmComponent, NgxChangeEmailComponent
 } from './components';
 
 const routes: Routes = [{
@@ -17,10 +17,6 @@ const routes: Routes = [{
     {
       path: '',
       component: NgxLoginComponent,
-    },
-    {
-      path: 'otp',
-      component: NgxOtpComponent,
     },
     {
       path: 'login',

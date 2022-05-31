@@ -1,59 +1,85 @@
 <!-- <mat-basic-audio-player [audioUrl]="msbapAudioUrl[0]" [autoPlay]="false" muted="muted" [displayVolumeControls]="msaapDisplayVolumeControls">
 </mat-basic-audio-player> -->
-<nb-card id="gamescreen" style="border:none;margin-top:-2rem;">
-    <ng-container *ngIf="case==='main'">
-        <nb-card-body [ngClass]="{show: opacityDelay, hide: !opacityDelay}">
-            <div class="row align-items-center">
-                <div class="col-md-4 offset-md-2 col-12 logo-container">
-                    <img class="intro-img img-fluid" [src]="getBaseUrl()+'/assets/skins/lightgray/img/logo.png'"
-                        [@zoomInDown]="{ value: animationState, params: { duration: 1000, delay: 600 } }">
-                </div>
-                <div class="col-md-6 col-12 buttons-container">
-                    <div class="d-flex justify-content-center flex-column align-items-center mt-4">
-                        <div class="col-md-6 buttons">
-                            <button class="btn-intro" nbButton fullWidth hero status="success" shape="semi-round"
-                                (click)="eventMain('playGame')"
-                                [@bounceInRight]="{ value: animationState, params: { duration: 1750, delay: 600 } }">
-                                <svg viewBox="0 0 36 36">
-                                    <g>
-                                        <path class="st0" d="M5,18.3c0,4.9,0,9.8,0,14.7l26-15C22.3,13,13.7,8,5,3C5,8.1,5.1,13.2,5,18.3z M8.1,28.2V7.8L25.8,18
+<ng-container *ngIf="case==='games'">
+    <nb-card>
+        <nb-card-header>
+            <h1 style="text-align:center">Games</h1>
+        </nb-card-header>
+        <nb-card-body>
+            <div class="row" style="display:flex;justify-content:center;margin-top: 1rem;">
+                <nb-card class="card-new col-md-4" *ngFor="let testGame of testGames;let i=index">
+                    <nb-card-header style="text-align:center">Game {{i+1}}</nb-card-header>
+                    <nb-card-body>
+
+                        <button nbButton fullWidth status="primary" size="medium" shape="round"
+                            (click)="openGame(testGame.id)">
+                            <i style="margin-right: 1rem;" class="fas fa-3x fa-solid fa-gamepad"></i>
+                            {{ testGame.name}}
+                        </button>
+
+                    </nb-card-body>
+                </nb-card>
+
+            </div>
+        </nb-card-body>
+    </nb-card>
+</ng-container>
+<ng-container *ngIf="case!=='games'">
+    <nb-card id="gamescreen" style="border:none;margin-top:-2rem;">
+
+        <ng-container *ngIf="case==='main'">
+            <nb-card-body [ngClass]="{show: opacityDelay, hide: !opacityDelay}">
+                <div class="row align-items-center">
+                    <div class="col-md-4 offset-md-2 col-12 logo-container">
+                        <img class="intro-img img-fluid" [src]="getBaseUrl()+'/assets/skins/lightgray/img/logo.png'"
+                            [@zoomInDown]="{ value: animationState, params: { duration: 1000, delay: 600 } }">
+                    </div>
+                    <div class="col-md-6 col-12 buttons-container">
+                        <div class="d-flex justify-content-center flex-column align-items-center mt-4">
+                            <div class="col-md-6 buttons">
+                                <button class="btn-intro" nbButton fullWidth hero status="success" shape="semi-round"
+                                    (click)="eventMain('playGame')"
+                                    [@bounceInRight]="{ value: animationState, params: { duration: 1750, delay: 600 } }">
+                                    <svg viewBox="0 0 36 36">
+                                        <g>
+                                            <path class="st0" d="M5,18.3c0,4.9,0,9.8,0,14.7l26-15C22.3,13,13.7,8,5,3C5,8.1,5.1,13.2,5,18.3z M8.1,28.2V7.8L25.8,18
 						            L8.1,28.2z" />
-                                    </g>
-                                </svg>
-                                <span>Start Game!</span>
-                                <span class="gradient-animation"></span>
-                            </button>
-                            <hr>
-                        </div>
-                        <div class="col-md-6 buttons mb-4">
-                            <button class="btn-intro" fullWidth nbButton hero status="info" shape="semi-round"
-                                (click)="eventMain('Leader_Board')"
-                                [@bounceInRight]="{ value: animationState, params: { duration: 1750, delay: 600 } }">
-                                <svg x="0px" y="0px" viewBox="0 0 36 36">
-                                    <g>
-                                        <path class="st0" d="M13.6,9.4l-0.7,3.9c-0.1,0.4,0.1,0.8,0.4,1c0.2,0.1,0.4,0.2,0.6,0.2c0.2,0,0.3,0,0.5-0.1l3.5-1.9l3.5,1.9
+                                        </g>
+                                    </svg>
+                                    <span>Start Game!</span>
+                                    <span class="gradient-animation"></span>
+                                </button>
+                                <hr>
+                            </div>
+                            <div class="col-md-6 buttons mb-4">
+                                <button class="btn-intro" fullWidth nbButton hero status="info" shape="semi-round"
+                                    (click)="eventMain('Leader_Board')"
+                                    [@bounceInRight]="{ value: animationState, params: { duration: 1750, delay: 600 } }">
+                                    <svg x="0px" y="0px" viewBox="0 0 36 36">
+                                        <g>
+                                            <path class="st0" d="M13.6,9.4l-0.7,3.9c-0.1,0.4,0.1,0.8,0.4,1c0.2,0.1,0.4,0.2,0.6,0.2c0.2,0,0.3,0,0.5-0.1l3.5-1.9l3.5,1.9
                                     c0.2,0.1,0.3,0.1,0.5,0.1c0,0,0,0,0,0c0.6,0,1.1-0.5,1.1-1.1c0-0.1,0-0.2,0-0.2l-0.7-3.9l2.9-2.8c0.3-0.3,0.4-0.7,0.3-1.1
                                     c-0.1-0.4-0.5-0.7-0.9-0.7l-4-0.6l-1.8-3.6C18.8,0.2,18.4,0,18,0c-0.4,0-0.8,0.2-0.9,0.6l-1.8,3.6l-4,0.6c-0.4,0.1-0.7,0.3-0.9,0.7
                                     c-0.1,0.4,0,0.8,0.3,1.1L13.6,9.4z M16.1,6.2c0.3,0,0.6-0.3,0.8-0.6L18,3.4l1.1,2.2c0.2,0.3,0.5,0.5,0.8,0.6l2.4,0.3l-1.7,1.7
                                     c-0.2,0.2-0.4,0.6-0.3,0.9l0.4,2.4l-2.1-1.1c-0.2-0.1-0.3-0.1-0.5-0.1c-0.2,0-0.3,0-0.5,0.1l-2.1,1.1l0.4-2.4
                                     c0.1-0.3-0.1-0.7-0.3-0.9l-1.7-1.7L16.1,6.2z" />
-                                        <path class="st0" d="M32.1,23.7h-4.5c-0.6,0-1.2,0.2-1.8,0.4v-3.3c0-2.1-1.7-3.9-3.9-3.9H14c-2.1,0-3.9,1.7-3.9,3.9v0.5
+                                            <path class="st0" d="M32.1,23.7h-4.5c-0.6,0-1.2,0.2-1.8,0.4v-3.3c0-2.1-1.7-3.9-3.9-3.9H14c-2.1,0-3.9,1.7-3.9,3.9v0.5
                                     c-0.5-0.3-1.1-0.4-1.8-0.4H3.9c-2.1,0-3.9,1.7-3.9,3.9v10.2C0,35.5,0.5,36,1.1,36h33.9c0.6,0,1.1-0.5,1.1-1.1v-7.3
                                     C36,25.5,34.3,23.7,32.1,23.7z M2.1,24.8c0-1,0.8-1.8,1.8-1.8h4.5c1,0,1.8,0.8,1.8,1.8v9.1H2.1V24.8z M12.3,24.8v-4
                                     c0-1,0.8-1.8,1.8-1.8H22c1,0,1.8,0.8,1.8,1.8v13.1H12.3V24.8z M33.9,33.9h-8.1v-6.3c0-1,0.8-1.8,1.8-1.8h4.5c1,0,1.8,0.8,1.8,1.8
                                     V33.9z" />
-                                    </g>
-                                </svg>
-                                <span>Leaderboard</span>
-                            </button>
-                        </div>
-                        <div class="col-md-6 buttons" *ngIf="isGift">
-                            <button nbButton hero fullWidth status="info" shape="semi-round"
-                                (click)="eventMain('gifts')"
-                                [@bounceInRight]="{ value: animationState, params: { duration: 1750, delay: 900 } }">
-                                <svg viewBox="0 0 36 36">
-                                    <g>
-                                        <path class="st0" d="M31.6,12.5l-3.5-1.3c1.3-1.1,1.8-2.7,1.4-4.3c-0.8-3.1-4.6-4.3-7-2.2l-2.4,2.2l-0.5-3.2
+                                        </g>
+                                    </svg>
+                                    <span>Leaderboard</span>
+                                </button>
+                            </div>
+                            <div class="col-md-6 buttons" *ngIf="isGift">
+                                <button nbButton hero fullWidth status="info" shape="semi-round"
+                                    (click)="eventMain('gifts')"
+                                    [@bounceInRight]="{ value: animationState, params: { duration: 1750, delay: 900 } }">
+                                    <svg viewBox="0 0 36 36">
+                                        <g>
+                                            <path class="st0" d="M31.6,12.5l-3.5-1.3c1.3-1.1,1.8-2.7,1.4-4.3c-0.8-3.1-4.6-4.3-7-2.2l-2.4,2.2l-0.5-3.2
                                     c-0.5-3.2-4.2-4.7-6.7-2.8c-1.3,0.9-2,2.6-1.7,4.2L7.9,3.9c-1.6-0.6-3.5,0.3-4,1.9l-1.4,4c-0.2,0.5,0.1,1.2,0.6,1.3
                                     c0.2,0.1,16.2,5.9,16.5,6c-0.7,0-15.3,0-15.9,0c-0.6,0-1.1,0.5-1.1,1.1v14.7c0,1.7,1.4,3.2,3.2,3.2h8.4h4.2h8.4
                                     c1.7,0,3.2-1.4,3.2-3.2v-12l0.8,0.3c0.5,0.2,1.1-0.1,1.3-0.6l1.4-4C34.1,14.9,33.2,13.1,31.6,12.5z M13,33.9H5.7
@@ -62,361 +88,363 @@
                                     C13,5.7,12.7,3.6,14.1,2.5z M14.6,13L4.7,9.4l1.1-3C6,5.9,6.6,5.6,7.1,5.8C8.2,6.2,15.7,9,16,9.1L14.6,13z M18.6,14.5l-2-0.7
                                     l1.4-4l2,0.7L18.6,14.5z M27.8,32.8c0,0.6-0.5,1.1-1.1,1.1h-7.4V19.2h5.9l2.5,0.9L27.8,32.8L27.8,32.8z M31.5,15.8l-1.1,3
                                     l-9.9-3.6l1.4-4l8.9,3.2C31.4,14.7,31.7,15.3,31.5,15.8z" />
-                                    </g>
-                                </svg>
-                                <span>Gifts</span>
-                            </button>
+                                        </g>
+                                    </svg>
+                                    <span>Gifts</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </nb-card-body>
-    </ng-container>
-    <ng-container *ngIf="case==='wheel'">
-        <nb-card-header [ngClass]="{show: opacityDelay, hide: !opacityDelay}" class="wheel-header d-flex"
-            [@flipInX]="{ value: animationState, params: { duration: 1000, delay: 300 } }">
-            <div *ngIf="!counter" class="slice d-flex align-items-center">
-                <svg viewBox="0 0 26.7 29">
-                    <g>
-                        <path class="st0" d="M21,2.8l3.1,2.6c0.2,0.2,0.5,0.3,0.7,0.3c0.3,0,0.6-0.1,0.9-0.4C26.1,4.7,26,4,25.6,3.6L22.5,1
-                            c-0.5-0.4-1.2-0.3-1.6,0.1C20.5,1.7,20.6,2.4,21,2.8z" />
-                        <path class="st0" d="M1.9,5.6c0.3,0,0.5-0.1,0.7-0.3l3.1-2.6c0.5-0.4,0.5-1.1,0.1-1.6C5.4,0.7,4.7,0.6,4.2,1L1.1,3.6
-                            C0.7,4,0.6,4.7,1,5.2C1.2,5.5,1.5,5.6,1.9,5.6z" />
-                        <path class="st0" d="M22.8,6.2c-2.3-2.3-5.2-3.6-8.3-3.9V1.1C14.5,0.5,14,0,13.4,0c-0.6,0-1.1,0.5-1.1,1.1v1.2
-                            C9.1,2.6,6.2,3.9,3.9,6.2C1.4,8.7,0,12,0,15.6s1.4,6.9,3.9,9.4c2.5,2.5,5.9,3.9,9.4,3.9c2.9,0,5.6-0.9,7.9-2.6
-                            c0.5-0.4,0.6-1.1,0.2-1.6c-0.4-0.5-1.1-0.6-1.6-0.2c-1.9,1.4-4.2,2.2-6.6,2.2c-6.1,0-11.1-5-11.1-11.1s5-11.1,11.1-11.1
-                            s11.1,5,11.1,11.1c0,1.9-0.5,3.7-1.4,5.3c-0.3,0.5-0.1,1.2,0.4,1.5c0.5,0.3,1.2,0.1,1.5-0.4c1.1-2,1.6-4.2,1.6-6.4
-                            C26.7,12,25.3,8.7,22.8,6.2z" />
-                        <path class="st0" d="M18.9,8.8c-0.5-0.4-1.2-0.3-1.6,0.2l-3.6,4.4c-0.1,0-0.2,0-0.4,0c-1.2,0-2.3,1-2.3,2.3s1,2.3,2.3,2.3
-                            s2.3-1,2.3-2.3c0-0.3-0.1-0.6-0.2-0.8l3.6-4.4C19.4,9.9,19.3,9.2,18.9,8.8z" />
-                    </g>
-                </svg>
-                <span>{{time | timing}}</span>
-            </div>
-            <div *ngIf="counter" class="slice d-flex align-items-center">
-                <svg viewBox="0 0 26.7 29">
-                    <g>
-                        <path class="st0" d="M21,2.8l3.1,2.6c0.2,0.2,0.5,0.3,0.7,0.3c0.3,0,0.6-0.1,0.9-0.4C26.1,4.7,26,4,25.6,3.6L22.5,1
-                            c-0.5-0.4-1.2-0.3-1.6,0.1C20.5,1.7,20.6,2.4,21,2.8z" />
-                        <path class="st0" d="M1.9,5.6c0.3,0,0.5-0.1,0.7-0.3l3.1-2.6c0.5-0.4,0.5-1.1,0.1-1.6C5.4,0.7,4.7,0.6,4.2,1L1.1,3.6
-                            C0.7,4,0.6,4.7,1,5.2C1.2,5.5,1.5,5.6,1.9,5.6z" />
-                        <path class="st0" d="M22.8,6.2c-2.3-2.3-5.2-3.6-8.3-3.9V1.1C14.5,0.5,14,0,13.4,0c-0.6,0-1.1,0.5-1.1,1.1v1.2
-                            C9.1,2.6,6.2,3.9,3.9,6.2C1.4,8.7,0,12,0,15.6s1.4,6.9,3.9,9.4c2.5,2.5,5.9,3.9,9.4,3.9c2.9,0,5.6-0.9,7.9-2.6
-                            c0.5-0.4,0.6-1.1,0.2-1.6c-0.4-0.5-1.1-0.6-1.6-0.2c-1.9,1.4-4.2,2.2-6.6,2.2c-6.1,0-11.1-5-11.1-11.1s5-11.1,11.1-11.1
-                            s11.1,5,11.1,11.1c0,1.9-0.5,3.7-1.4,5.3c-0.3,0.5-0.1,1.2,0.4,1.5c0.5,0.3,1.2,0.1,1.5-0.4c1.1-2,1.6-4.2,1.6-6.4
-                            C26.7,12,25.3,8.7,22.8,6.2z" />
-                        <path class="st0" d="M18.9,8.8c-0.5-0.4-1.2-0.3-1.6,0.2l-3.6,4.4c-0.1,0-0.2,0-0.4,0c-1.2,0-2.3,1-2.3,2.3s1,2.3,2.3,2.3
-                            s2.3-1,2.3-2.3c0-0.3-0.1-0.6-0.2-0.8l3.6-4.4C19.4,9.9,19.3,9.2,18.9,8.8z" />
-                    </g>
-                </svg>
-                <span> {{counter | timing}}</span>
-            </div>
-            <div class="slice d-flex align-items-center">
-                <img class="icon-img" [src]="getBaseUrl()+'/assets/skins/lightgray/img/icon-coin.svg'" alt="">
-                <span>{{score}}</span>
-            </div>
-        </nb-card-header>
-        <nb-card-body style="overflow: hidden;">
-            <!--Category-->
-            <div class="col-md-12 category-container">
-
-                <div *ngIf="catName" [ngClass]="{show: opacityCatDelay, hide: !opacityCatDelay}"
-                    class="col-md-12 d-flex align-items-center justify-content-center category"
-                    [@fadeInUp]="{ value: animationCat}">
-                    <img class="icon-img" [src]="getBaseUrl()+'/assets/skins/lightgray/img/icon-category.svg'">
-                    <span>{{allCat[categoryIndex].name}} </span>
-                </div>
-            </div>
-            <!--Button Spin-->
-            <button class="button spin" nbButton hero status="info" shape="semi-round" (click)="spinWheel()">
-                <img class="icon-spin" [src]="getBaseUrl()+'/assets/skins/lightgray/img/icon-spin.svg'" alt="">
-                <span>Spin!</span>
-            </button>
-            <div class="col-md-12 d-flex justify-content-center wheel-container" style="margin-top: 2vh;"
-                [@bounceIn]="{ value: animationState, params: { duration: 1750} }">
-                <img class="wheel-pointer" [src]="getBaseUrl()+'/assets/skins/lightgray/img/wheel-pointer.png'" alt="">
-                <img class="wheel-frame" [src]="getBaseUrl()+'/assets/skins/lightgray/img/wheel-frame.png'" alt="">
-
-                <!--Wheel Canvas-->
-                <ngx-wheel class="mb-4" #wheel width='375' height='375' spinDuration='1' [items]='items'
-                    [innerRadius]='20' [spinAmount]='10' [textOrientation]='textOrientation'
-                    [disableSpinOnClick]='false' [textAlignment]='textAlignment' pointerStrokeColor='transparent'
-                    pointerFillColor='transparent' [idToLandOn]='catIndex' (onSpinComplete)='after()'>
-                </ngx-wheel>
-                <!--End Wheel Canvas-->
-            </div>
-            <!--cpanel-->
-            <ul class="cpanel" style="margin-top: 44px;margin-left: -22px;">
-                <li>
-                    <nb-icon class="nb-icon" icon="volume-off-outline"></nb-icon>
-                    <span>MUTE</span>
-                </li>
-                <li>
-                    <svg x="0px" y="0px" viewBox="0 0 36 36">
+            </nb-card-body>
+        </ng-container>
+        <ng-container *ngIf="case==='wheel'">
+            <nb-card-header [ngClass]="{show: opacityDelay, hide: !opacityDelay}" class="wheel-header d-flex"
+                [@flipInX]="{ value: animationState, params: { duration: 1000, delay: 300 } }">
+                <div *ngIf="!counter" class="slice d-flex align-items-center">
+                    <svg viewBox="0 0 26.7 29">
                         <g>
-                            <path class="st0" d="M13.6,9.4l-0.7,3.9c-0.1,0.4,0.1,0.8,0.4,1c0.2,0.1,0.4,0.2,0.6,0.2c0.2,0,0.3,0,0.5-0.1l3.5-1.9l3.5,1.9
+                            <path class="st0" d="M21,2.8l3.1,2.6c0.2,0.2,0.5,0.3,0.7,0.3c0.3,0,0.6-0.1,0.9-0.4C26.1,4.7,26,4,25.6,3.6L22.5,1
+                            c-0.5-0.4-1.2-0.3-1.6,0.1C20.5,1.7,20.6,2.4,21,2.8z" />
+                            <path class="st0" d="M1.9,5.6c0.3,0,0.5-0.1,0.7-0.3l3.1-2.6c0.5-0.4,0.5-1.1,0.1-1.6C5.4,0.7,4.7,0.6,4.2,1L1.1,3.6
+                            C0.7,4,0.6,4.7,1,5.2C1.2,5.5,1.5,5.6,1.9,5.6z" />
+                            <path class="st0" d="M22.8,6.2c-2.3-2.3-5.2-3.6-8.3-3.9V1.1C14.5,0.5,14,0,13.4,0c-0.6,0-1.1,0.5-1.1,1.1v1.2
+                            C9.1,2.6,6.2,3.9,3.9,6.2C1.4,8.7,0,12,0,15.6s1.4,6.9,3.9,9.4c2.5,2.5,5.9,3.9,9.4,3.9c2.9,0,5.6-0.9,7.9-2.6
+                            c0.5-0.4,0.6-1.1,0.2-1.6c-0.4-0.5-1.1-0.6-1.6-0.2c-1.9,1.4-4.2,2.2-6.6,2.2c-6.1,0-11.1-5-11.1-11.1s5-11.1,11.1-11.1
+                            s11.1,5,11.1,11.1c0,1.9-0.5,3.7-1.4,5.3c-0.3,0.5-0.1,1.2,0.4,1.5c0.5,0.3,1.2,0.1,1.5-0.4c1.1-2,1.6-4.2,1.6-6.4
+                            C26.7,12,25.3,8.7,22.8,6.2z" />
+                            <path class="st0" d="M18.9,8.8c-0.5-0.4-1.2-0.3-1.6,0.2l-3.6,4.4c-0.1,0-0.2,0-0.4,0c-1.2,0-2.3,1-2.3,2.3s1,2.3,2.3,2.3
+                            s2.3-1,2.3-2.3c0-0.3-0.1-0.6-0.2-0.8l3.6-4.4C19.4,9.9,19.3,9.2,18.9,8.8z" />
+                        </g>
+                    </svg>
+                    <span>{{time | timing}}</span>
+                </div>
+                <div *ngIf="counter" class="slice d-flex align-items-center">
+                    <svg viewBox="0 0 26.7 29">
+                        <g>
+                            <path class="st0" d="M21,2.8l3.1,2.6c0.2,0.2,0.5,0.3,0.7,0.3c0.3,0,0.6-0.1,0.9-0.4C26.1,4.7,26,4,25.6,3.6L22.5,1
+                            c-0.5-0.4-1.2-0.3-1.6,0.1C20.5,1.7,20.6,2.4,21,2.8z" />
+                            <path class="st0" d="M1.9,5.6c0.3,0,0.5-0.1,0.7-0.3l3.1-2.6c0.5-0.4,0.5-1.1,0.1-1.6C5.4,0.7,4.7,0.6,4.2,1L1.1,3.6
+                            C0.7,4,0.6,4.7,1,5.2C1.2,5.5,1.5,5.6,1.9,5.6z" />
+                            <path class="st0" d="M22.8,6.2c-2.3-2.3-5.2-3.6-8.3-3.9V1.1C14.5,0.5,14,0,13.4,0c-0.6,0-1.1,0.5-1.1,1.1v1.2
+                            C9.1,2.6,6.2,3.9,3.9,6.2C1.4,8.7,0,12,0,15.6s1.4,6.9,3.9,9.4c2.5,2.5,5.9,3.9,9.4,3.9c2.9,0,5.6-0.9,7.9-2.6
+                            c0.5-0.4,0.6-1.1,0.2-1.6c-0.4-0.5-1.1-0.6-1.6-0.2c-1.9,1.4-4.2,2.2-6.6,2.2c-6.1,0-11.1-5-11.1-11.1s5-11.1,11.1-11.1
+                            s11.1,5,11.1,11.1c0,1.9-0.5,3.7-1.4,5.3c-0.3,0.5-0.1,1.2,0.4,1.5c0.5,0.3,1.2,0.1,1.5-0.4c1.1-2,1.6-4.2,1.6-6.4
+                            C26.7,12,25.3,8.7,22.8,6.2z" />
+                            <path class="st0" d="M18.9,8.8c-0.5-0.4-1.2-0.3-1.6,0.2l-3.6,4.4c-0.1,0-0.2,0-0.4,0c-1.2,0-2.3,1-2.3,2.3s1,2.3,2.3,2.3
+                            s2.3-1,2.3-2.3c0-0.3-0.1-0.6-0.2-0.8l3.6-4.4C19.4,9.9,19.3,9.2,18.9,8.8z" />
+                        </g>
+                    </svg>
+                    <span> {{counter | timing}}</span>
+                </div>
+                <div class="slice d-flex align-items-center">
+                    <img class="icon-img" [src]="getBaseUrl()+'/assets/skins/lightgray/img/icon-coin.svg'" alt="">
+                    <span>{{score}}</span>
+                </div>
+            </nb-card-header>
+            <nb-card-body style="overflow: hidden;">
+                <!--Category-->
+                <div class="col-md-12 category-container">
+
+                    <div *ngIf="catName" [ngClass]="{show: opacityCatDelay, hide: !opacityCatDelay}"
+                        class="col-md-12 d-flex align-items-center justify-content-center category"
+                        [@fadeInUp]="{ value: animationCat}">
+                        <img class="icon-img" [src]="getBaseUrl()+'/assets/skins/lightgray/img/icon-category.svg'">
+                        <span>{{allCat[categoryIndex].name}} </span>
+                    </div>
+                </div>
+                <!--Button Spin-->
+                <button class="button spin" nbButton hero status="info" shape="semi-round" (click)="spinWheel()">
+                    <img class="icon-spin" [src]="getBaseUrl()+'/assets/skins/lightgray/img/icon-spin.svg'" alt="">
+                    <span>Spin!</span>
+                </button>
+                <div class="col-md-12 d-flex justify-content-center wheel-container" style="margin-top: 2vh;"
+                    [@bounceIn]="{ value: animationState, params: { duration: 1750} }">
+                    <img class="wheel-pointer" [src]="getBaseUrl()+'/assets/skins/lightgray/img/wheel-pointer.png'"
+                        alt="">
+                    <img class="wheel-frame" [src]="getBaseUrl()+'/assets/skins/lightgray/img/wheel-frame.png'" alt="">
+
+                    <!--Wheel Canvas-->
+                    <ngx-wheel class="mb-4" #wheel width='375' height='375' spinDuration='1' [items]='items'
+                        [innerRadius]='20' [spinAmount]='10' [textOrientation]='textOrientation'
+                        [disableSpinOnClick]='false' [textAlignment]='textAlignment' pointerStrokeColor='transparent'
+                        pointerFillColor='transparent' [idToLandOn]='catIndex' (onSpinComplete)='after()'>
+                    </ngx-wheel>
+                    <!--End Wheel Canvas-->
+                </div>
+                <!--cpanel-->
+                <ul class="cpanel" style="margin-top: 44px;margin-left: -22px;">
+                    <li>
+                        <nb-icon class="nb-icon" icon="volume-off-outline"></nb-icon>
+                        <span>MUTE</span>
+                    </li>
+                    <li>
+                        <svg x="0px" y="0px" viewBox="0 0 36 36">
+                            <g>
+                                <path class="st0" d="M13.6,9.4l-0.7,3.9c-0.1,0.4,0.1,0.8,0.4,1c0.2,0.1,0.4,0.2,0.6,0.2c0.2,0,0.3,0,0.5-0.1l3.5-1.9l3.5,1.9
                         c0.2,0.1,0.3,0.1,0.5,0.1c0,0,0,0,0,0c0.6,0,1.1-0.5,1.1-1.1c0-0.1,0-0.2,0-0.2l-0.7-3.9l2.9-2.8c0.3-0.3,0.4-0.7,0.3-1.1
                         c-0.1-0.4-0.5-0.7-0.9-0.7l-4-0.6l-1.8-3.6C18.8,0.2,18.4,0,18,0c-0.4,0-0.8,0.2-0.9,0.6l-1.8,3.6l-4,0.6c-0.4,0.1-0.7,0.3-0.9,0.7
                         c-0.1,0.4,0,0.8,0.3,1.1L13.6,9.4z M16.1,6.2c0.3,0,0.6-0.3,0.8-0.6L18,3.4l1.1,2.2c0.2,0.3,0.5,0.5,0.8,0.6l2.4,0.3l-1.7,1.7
                         c-0.2,0.2-0.4,0.6-0.3,0.9l0.4,2.4l-2.1-1.1c-0.2-0.1-0.3-0.1-0.5-0.1c-0.2,0-0.3,0-0.5,0.1l-2.1,1.1l0.4-2.4
                         c0.1-0.3-0.1-0.7-0.3-0.9l-1.7-1.7L16.1,6.2z" />
-                            <path class="st0" d="M32.1,23.7h-4.5c-0.6,0-1.2,0.2-1.8,0.4v-3.3c0-2.1-1.7-3.9-3.9-3.9H14c-2.1,0-3.9,1.7-3.9,3.9v0.5
+                                <path class="st0" d="M32.1,23.7h-4.5c-0.6,0-1.2,0.2-1.8,0.4v-3.3c0-2.1-1.7-3.9-3.9-3.9H14c-2.1,0-3.9,1.7-3.9,3.9v0.5
                         c-0.5-0.3-1.1-0.4-1.8-0.4H3.9c-2.1,0-3.9,1.7-3.9,3.9v10.2C0,35.5,0.5,36,1.1,36h33.9c0.6,0,1.1-0.5,1.1-1.1v-7.3
                         C36,25.5,34.3,23.7,32.1,23.7z M2.1,24.8c0-1,0.8-1.8,1.8-1.8h4.5c1,0,1.8,0.8,1.8,1.8v9.1H2.1V24.8z M12.3,24.8v-4
                         c0-1,0.8-1.8,1.8-1.8H22c1,0,1.8,0.8,1.8,1.8v13.1H12.3V24.8z M33.9,33.9h-8.1v-6.3c0-1,0.8-1.8,1.8-1.8h4.5c1,0,1.8,0.8,1.8,1.8
                         V33.9z" />
-                        </g>
-                    </svg>
-                    <span>LEADERBOARD</span>
-                </li>
-            </ul>
-        </nb-card-body>
-    </ng-container>
-    <ng-container *ngIf="case==='questions'">
-        <nb-card-header class="wheel-header questions">
-            <div class="row">
-                <div class="col-md-8 offset-md-2 mb-2">
-                    <div class="row">
-                        <div class="col-md-4 d-flex align-items-start flex-column">
-                            <div class="d-flex align-items-center category">
-                                <img class="icon-img "
-                                    [src]="getBaseUrl()+'/assets/skins/lightgray/img/icon-category.svg'">
-                                <span>{{allCat[categoryIndex].name}}</span>
-                            </div>
+                            </g>
+                        </svg>
+                        <span>LEADERBOARD</span>
+                    </li>
+                </ul>
+            </nb-card-body>
+        </ng-container>
+        <ng-container *ngIf="case==='questions'">
+            <nb-card-header class="wheel-header questions">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 mb-2">
+                        <div class="row">
+                            <div class="col-md-4 d-flex align-items-start flex-column">
+                                <div class="d-flex align-items-center category">
+                                    <img class="icon-img "
+                                        [src]="getBaseUrl()+'/assets/skins/lightgray/img/icon-category.svg'">
+                                    <span>{{allCat[categoryIndex].name}}</span>
+                                </div>
 
-                            <div *ngIf="!counter" class="slice hud d-flex align-items-center">
+                                <div *ngIf="!counter" class="slice hud d-flex align-items-center">
 
-                                <div class="d-flex align-items-center">
-                                    <svg viewBox="0 0 26.7 29">
-                                        <g>
-                                            <path class="st0" d="M21,2.8l3.1,2.6c0.2,0.2,0.5,0.3,0.7,0.3c0.3,0,0.6-0.1,0.9-0.4C26.1,4.7,26,4,25.6,3.6L22.5,1
+                                    <div class="d-flex align-items-center">
+                                        <svg viewBox="0 0 26.7 29">
+                                            <g>
+                                                <path class="st0" d="M21,2.8l3.1,2.6c0.2,0.2,0.5,0.3,0.7,0.3c0.3,0,0.6-0.1,0.9-0.4C26.1,4.7,26,4,25.6,3.6L22.5,1
                                         c-0.5-0.4-1.2-0.3-1.6,0.1C20.5,1.7,20.6,2.4,21,2.8z" />
-                                            <path class="st0" d="M1.9,5.6c0.3,0,0.5-0.1,0.7-0.3l3.1-2.6c0.5-0.4,0.5-1.1,0.1-1.6C5.4,0.7,4.7,0.6,4.2,1L1.1,3.6
+                                                <path class="st0" d="M1.9,5.6c0.3,0,0.5-0.1,0.7-0.3l3.1-2.6c0.5-0.4,0.5-1.1,0.1-1.6C5.4,0.7,4.7,0.6,4.2,1L1.1,3.6
                                         C0.7,4,0.6,4.7,1,5.2C1.2,5.5,1.5,5.6,1.9,5.6z" />
-                                            <path class="st0" d="M22.8,6.2c-2.3-2.3-5.2-3.6-8.3-3.9V1.1C14.5,0.5,14,0,13.4,0c-0.6,0-1.1,0.5-1.1,1.1v1.2
+                                                <path class="st0" d="M22.8,6.2c-2.3-2.3-5.2-3.6-8.3-3.9V1.1C14.5,0.5,14,0,13.4,0c-0.6,0-1.1,0.5-1.1,1.1v1.2
                                         C9.1,2.6,6.2,3.9,3.9,6.2C1.4,8.7,0,12,0,15.6s1.4,6.9,3.9,9.4c2.5,2.5,5.9,3.9,9.4,3.9c2.9,0,5.6-0.9,7.9-2.6
                                         c0.5-0.4,0.6-1.1,0.2-1.6c-0.4-0.5-1.1-0.6-1.6-0.2c-1.9,1.4-4.2,2.2-6.6,2.2c-6.1,0-11.1-5-11.1-11.1s5-11.1,11.1-11.1
                                         s11.1,5,11.1,11.1c0,1.9-0.5,3.7-1.4,5.3c-0.3,0.5-0.1,1.2,0.4,1.5c0.5,0.3,1.2,0.1,1.5-0.4c1.1-2,1.6-4.2,1.6-6.4
                                         C26.7,12,25.3,8.7,22.8,6.2z" />
-                                            <path class="st0" d="M18.9,8.8c-0.5-0.4-1.2-0.3-1.6,0.2l-3.6,4.4c-0.1,0-0.2,0-0.4,0c-1.2,0-2.3,1-2.3,2.3s1,2.3,2.3,2.3
+                                                <path class="st0" d="M18.9,8.8c-0.5-0.4-1.2-0.3-1.6,0.2l-3.6,4.4c-0.1,0-0.2,0-0.4,0c-1.2,0-2.3,1-2.3,2.3s1,2.3,2.3,2.3
                                         s2.3-1,2.3-2.3c0-0.3-0.1-0.6-0.2-0.8l3.6-4.4C19.4,9.9,19.3,9.2,18.9,8.8z" />
-                                        </g>
-                                    </svg>
-                                    <span>{{time | timing}}</span>
-                                </div>
+                                            </g>
+                                        </svg>
+                                        <span>{{time | timing}}</span>
+                                    </div>
 
-                                <div class="d-flex align-items-center">
-                                    <img #point class=""
-                                        [src]="getBaseUrl()+'/assets/skins/lightgray/img/icon-coin.svg'">
-                                    <span>{{score}}</span>
+                                    <div class="d-flex align-items-center">
+                                        <img #point class=""
+                                            [src]="getBaseUrl()+'/assets/skins/lightgray/img/icon-coin.svg'">
+                                        <span>{{score}}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div *ngIf="counter" class="slice d-flex align-items-center">
-                                <svg viewBox="0 0 26.7 29">
-                                    <g>
-                                        <path class="st0" d="M21,2.8l3.1,2.6c0.2,0.2,0.5,0.3,0.7,0.3c0.3,0,0.6-0.1,0.9-0.4C26.1,4.7,26,4,25.6,3.6L22.5,1
+                                <div *ngIf="counter" class="slice d-flex align-items-center">
+                                    <svg viewBox="0 0 26.7 29">
+                                        <g>
+                                            <path class="st0" d="M21,2.8l3.1,2.6c0.2,0.2,0.5,0.3,0.7,0.3c0.3,0,0.6-0.1,0.9-0.4C26.1,4.7,26,4,25.6,3.6L22.5,1
                                     c-0.5-0.4-1.2-0.3-1.6,0.1C20.5,1.7,20.6,2.4,21,2.8z" />
-                                        <path class="st0" d="M1.9,5.6c0.3,0,0.5-0.1,0.7-0.3l3.1-2.6c0.5-0.4,0.5-1.1,0.1-1.6C5.4,0.7,4.7,0.6,4.2,1L1.1,3.6
+                                            <path class="st0" d="M1.9,5.6c0.3,0,0.5-0.1,0.7-0.3l3.1-2.6c0.5-0.4,0.5-1.1,0.1-1.6C5.4,0.7,4.7,0.6,4.2,1L1.1,3.6
                                     C0.7,4,0.6,4.7,1,5.2C1.2,5.5,1.5,5.6,1.9,5.6z" />
-                                        <path class="st0" d="M22.8,6.2c-2.3-2.3-5.2-3.6-8.3-3.9V1.1C14.5,0.5,14,0,13.4,0c-0.6,0-1.1,0.5-1.1,1.1v1.2
+                                            <path class="st0" d="M22.8,6.2c-2.3-2.3-5.2-3.6-8.3-3.9V1.1C14.5,0.5,14,0,13.4,0c-0.6,0-1.1,0.5-1.1,1.1v1.2
                                     C9.1,2.6,6.2,3.9,3.9,6.2C1.4,8.7,0,12,0,15.6s1.4,6.9,3.9,9.4c2.5,2.5,5.9,3.9,9.4,3.9c2.9,0,5.6-0.9,7.9-2.6
                                     c0.5-0.4,0.6-1.1,0.2-1.6c-0.4-0.5-1.1-0.6-1.6-0.2c-1.9,1.4-4.2,2.2-6.6,2.2c-6.1,0-11.1-5-11.1-11.1s5-11.1,11.1-11.1
                                     s11.1,5,11.1,11.1c0,1.9-0.5,3.7-1.4,5.3c-0.3,0.5-0.1,1.2,0.4,1.5c0.5,0.3,1.2,0.1,1.5-0.4c1.1-2,1.6-4.2,1.6-6.4
                                     C26.7,12,25.3,8.7,22.8,6.2z" />
-                                        <path class="st0" d="M18.9,8.8c-0.5-0.4-1.2-0.3-1.6,0.2l-3.6,4.4c-0.1,0-0.2,0-0.4,0c-1.2,0-2.3,1-2.3,2.3s1,2.3,2.3,2.3
+                                            <path class="st0" d="M18.9,8.8c-0.5-0.4-1.2-0.3-1.6,0.2l-3.6,4.4c-0.1,0-0.2,0-0.4,0c-1.2,0-2.3,1-2.3,2.3s1,2.3,2.3,2.3
                                     s2.3-1,2.3-2.3c0-0.3-0.1-0.6-0.2-0.8l3.6-4.4C19.4,9.9,19.3,9.2,18.9,8.8z" />
-                                    </g>
-                                </svg>
-                                <span>{{counter | timing}}</span>
+                                        </g>
+                                    </svg>
+                                    <span>{{counter | timing}}</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-2 double-answer mt-2">
-                            <span *ngIf="isDoubleAnswer===2"> You choosed double Answer</span>
-                        </div>
-                        <div *ngIf="isJoker" class="col-md-6"
-                            [ngClass]="{show: opacityJokerDelay, hide: !opacityJokerDelay}">
-                            <div class="jokers">
-                                <h5>JOKERS</h5>
-                                <div class="joker wise" *ngIf="isWise===1">
-                                    <!-- <span *ngIf="isWise===1" class="wise float-right" style="margin-bottom:0.1vh">
+                            <div class="col-md-2 double-answer mt-2">
+                                <span *ngIf="isDoubleAnswer===2"> You choosed double Answer</span>
+                            </div>
+                            <div *ngIf="isJoker" class="col-md-6"
+                                [ngClass]="{show: opacityJokerDelay, hide: !opacityJokerDelay}">
+                                <div class="jokers">
+                                    <h5>JOKERS</h5>
+                                    <div class="joker wise" *ngIf="isWise===1">
+                                        <!-- <span *ngIf="isWise===1" class="wise float-right" style="margin-bottom:0.1vh">
                                         <button (click)="wise()" outline nbButton size="tiny" status="primary">Ask
                                             the wise</button>
                                     </span> -->
-                                    <button nbTooltip="Ask The Wise"
-                                        [ngClass]="{jokerShow:isWise===1, jokerHide: isWise!==1}"
-                                        [@bounceInDown]="{ value: animationJokers, params: { duration: 1750, delay: 300 } }"
-                                        nbTooltipStatus="info" (click)="wise()" outline nbButton size="tiny"
-                                        status="primary">
-                                        <img [src]="getBaseUrl() + '/assets/skins/lightgray/img/j-wise.png'">
-                                    </button>
-                                </div>
-                                <div class="joker halfAndHalf float-right" *ngIf="isHalf===1">
-                                    <button nbTooltip="Eliminate Options"
-                                        [ngClass]="{jokerShow: isHalf===1, jokerHide: isHalf!==1}"
-                                        [@bounceInDown]="{ value: animationJokers, params: { duration: 1750, delay: 600 } }"
-                                        nbTooltipStatus="info" (click)="halfAndHalf()" outline nbButton size="tiny"
-                                        status="primary">
-                                        <img [src]="getBaseUrl() + '/assets/skins/lightgray/img/j-half.png'">
-                                    </button>
-                                </div>
-                                <div class="joker doubleAnswer float-right" *ngIf="isDoubleAnswer===1">
-                                    <button nbTooltip="Double Answer"
-                                        [ngClass]="{jokerShow:  isDoubleAnswer===1, jokerHide: isDoubleAnswer!==1}"
-                                        [@bounceInDown]="{ value: animationJokers, params: { duration: 1750, delay: 900 } }"
-                                        nbTooltipStatus="info" (click)="doubleAnswer()" outline nbButton size="tiny"
-                                        status="primary">
-                                        <img [src]="getBaseUrl() + '/assets/skins/lightgray/img/j-double.png'">
-                                    </button>
-                                </div>
-                                <div class="joker deleteOneAnswer float-right" *ngIf="isDeleteOneOption===1">
-                                    <button nbTooltip="Delete One Answer"
-                                        [ngClass]="{jokerShow: isDeleteOneOption===1, jokerHide: isDeleteOneOption!==1}"
-                                        [@bounceInDown]="{ value: animationJokers, params: { duration: 1750, delay: 1200 } }"
-                                        nbTooltipStatus="info" (click)="deleteOneOption()" outline nbButton size="tiny"
-                                        [disabled]="jokersDisabled" status="primary">
-                                        <img [src]="getBaseUrl() + '/assets/skins/lightgray/img/j-delete.png'">
-                                    </button>
+                                        <button nbTooltip="Ask The Wise"
+                                            [ngClass]="{jokerShow:isWise===1, jokerHide: isWise!==1}"
+                                            [@bounceInDown]="{ value: animationJokers, params: { duration: 1750, delay: 300 } }"
+                                            nbTooltipStatus="info" (click)="wise()" outline nbButton size="tiny"
+                                            status="primary">
+                                            <img [src]="getBaseUrl() + '/assets/skins/lightgray/img/j-wise.png'">
+                                        </button>
+                                    </div>
+                                    <div class="joker halfAndHalf float-right" *ngIf="isHalf===1">
+                                        <button nbTooltip="Eliminate Options"
+                                            [ngClass]="{jokerShow: isHalf===1, jokerHide: isHalf!==1}"
+                                            [@bounceInDown]="{ value: animationJokers, params: { duration: 1750, delay: 600 } }"
+                                            nbTooltipStatus="info" (click)="halfAndHalf()" outline nbButton size="tiny"
+                                            status="primary">
+                                            <img [src]="getBaseUrl() + '/assets/skins/lightgray/img/j-half.png'">
+                                        </button>
+                                    </div>
+                                    <div class="joker doubleAnswer float-right" *ngIf="isDoubleAnswer===1">
+                                        <button nbTooltip="Double Answer"
+                                            [ngClass]="{jokerShow:  isDoubleAnswer===1, jokerHide: isDoubleAnswer!==1}"
+                                            [@bounceInDown]="{ value: animationJokers, params: { duration: 1750, delay: 900 } }"
+                                            nbTooltipStatus="info" (click)="doubleAnswer()" outline nbButton size="tiny"
+                                            status="primary">
+                                            <img [src]="getBaseUrl() + '/assets/skins/lightgray/img/j-double.png'">
+                                        </button>
+                                    </div>
+                                    <div class="joker deleteOneAnswer float-right" *ngIf="isDeleteOneOption===1">
+                                        <button nbTooltip="Delete One Answer"
+                                            [ngClass]="{jokerShow: isDeleteOneOption===1, jokerHide: isDeleteOneOption!==1}"
+                                            [@bounceInDown]="{ value: animationJokers, params: { duration: 1750, delay: 1200 } }"
+                                            nbTooltipStatus="info" (click)="deleteOneOption()" outline nbButton
+                                            size="tiny" [disabled]="jokersDisabled" status="primary">
+                                            <img [src]="getBaseUrl() + '/assets/skins/lightgray/img/j-delete.png'">
+                                        </button>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </nb-card-header>
-        <nb-card-body class="question-card">
+            </nb-card-header>
+            <nb-card-body class="question-card">
 
-            <div class="row">
-                <div class="col-md-8 offset-md-2 mb-4 question-text">
-                    <span>QUESTION {{solvedQuestion}}/{{totalQuestion}}</span>
-                    {{allCat[categoryIndex][questionIndex].name}}
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 mb-4 question-text">
+                        <span>QUESTION {{solvedQuestion}}/{{totalQuestion}}</span>
+                        {{allCat[categoryIndex][questionIndex].name}}
+                    </div>
                 </div>
-            </div>
-            <ng-container *ngIf="caseQuestion ==='multiple-choice'">
-                <choice (optionEmit)="controlOption($event)" [questionOption]="questionOption"></choice>
-            </ng-container>
+                <ng-container *ngIf="caseQuestion ==='multiple-choice'">
+                    <choice (optionEmit)="controlOption($event)" [questionOption]="questionOption"></choice>
+                </ng-container>
 
-            <!--not: aşağıdaki geribildirimler soru cevaplandıktan sonra görünmeli-->
+                <!--not: aşağıdaki geribildirimler soru cevaplandıktan sonra görünmeli-->
 
-            <ng-container *ngIf="isCorrectAnswer && caseQuestion !=='pairing-type'">
-                <div class="col-md-4 offset-md-4 callback" [ngClass]="{show: opacityDelay, hide: !opacityDelay}">
-                    <ng-container *ngIf="correctAnswer==='True Answer'">
-                        <img class="icon" [src]="getBaseUrl()+'/assets/skins/lightgray/img/icon-correct.png'"
-                            [@flipInY]="{ value: animationState, params: { duration: 1750} }">
-                    </ng-container>
-                    <ng-container *ngIf="correctAnswer!=='True Answer'">
-                        <img class="icon" [src]="getBaseUrl()+'/assets/skins/lightgray/img/icon-false.png'"
-                            [@flipInY]="{ value: animationState, params: { duration: 1750} }">
-                    </ng-container>
-                    <div [@fadeInUp]="{ value: animationState, params: { duration: 1000} }">
-                        {{correctAnswer}}</div>
-                    <ng-container *ngIf="imageDirectory && caseQuestion !=='multiple-selection'"
-                        [@fadeInUp]="{ value: animationState, params: { duration: 1000} }">
-                        <img class="rounded mx-auto d-block" style="max-height: 150px"
-                            src="{{baseUrl}}{{imageDirectory}}" />
-                    </ng-container>
+                <ng-container *ngIf="isCorrectAnswer && caseQuestion !=='pairing-type'">
+                    <div class="col-md-4 offset-md-4 callback" [ngClass]="{show: opacityDelay, hide: !opacityDelay}">
+                        <ng-container *ngIf="correctAnswer==='True Answer'">
+                            <img class="icon" [src]="getBaseUrl()+'/assets/skins/lightgray/img/icon-correct.png'"
+                                [@flipInY]="{ value: animationState, params: { duration: 1750} }">
+                        </ng-container>
+                        <ng-container *ngIf="correctAnswer!=='True Answer'">
+                            <img class="icon" [src]="getBaseUrl()+'/assets/skins/lightgray/img/icon-false.png'"
+                                [@flipInY]="{ value: animationState, params: { duration: 1750} }">
+                        </ng-container>
+                        <div [@fadeInUp]="{ value: animationState, params: { duration: 1000} }">
+                            {{correctAnswer}}</div>
+                        <ng-container *ngIf="imageDirectory && caseQuestion !=='multiple-selection'"
+                            [@fadeInUp]="{ value: animationState, params: { duration: 1000} }">
+                            <img class="rounded mx-auto d-block" style="max-height: 150px"
+                                src="{{baseUrl}}{{imageDirectory}}" />
+                        </ng-container>
 
-                </div>
-            </ng-container>
+                    </div>
+                </ng-container>
 
-            <!--cpanel-->
-            <ul class="cpanel" style="margin-top: 44px;margin-left: -22px;">
-                <li>
-                    <nb-icon class="nb-icon" icon="volume-off-outline"></nb-icon>
-                    <span>MUTE</span>
-                </li>
-                <li>
-                    <svg x="0px" y="0px" viewBox="0 0 36 36">
-                        <g>
-                            <path class="st0" d="M13.6,9.4l-0.7,3.9c-0.1,0.4,0.1,0.8,0.4,1c0.2,0.1,0.4,0.2,0.6,0.2c0.2,0,0.3,0,0.5-0.1l3.5-1.9l3.5,1.9
+                <!--cpanel-->
+                <ul class="cpanel" style="margin-top: 44px;margin-left: -22px;">
+                    <li>
+                        <nb-icon class="nb-icon" icon="volume-off-outline"></nb-icon>
+                        <span>MUTE</span>
+                    </li>
+                    <li>
+                        <svg x="0px" y="0px" viewBox="0 0 36 36">
+                            <g>
+                                <path class="st0" d="M13.6,9.4l-0.7,3.9c-0.1,0.4,0.1,0.8,0.4,1c0.2,0.1,0.4,0.2,0.6,0.2c0.2,0,0.3,0,0.5-0.1l3.5-1.9l3.5,1.9
                         c0.2,0.1,0.3,0.1,0.5,0.1c0,0,0,0,0,0c0.6,0,1.1-0.5,1.1-1.1c0-0.1,0-0.2,0-0.2l-0.7-3.9l2.9-2.8c0.3-0.3,0.4-0.7,0.3-1.1
                         c-0.1-0.4-0.5-0.7-0.9-0.7l-4-0.6l-1.8-3.6C18.8,0.2,18.4,0,18,0c-0.4,0-0.8,0.2-0.9,0.6l-1.8,3.6l-4,0.6c-0.4,0.1-0.7,0.3-0.9,0.7
                         c-0.1,0.4,0,0.8,0.3,1.1L13.6,9.4z M16.1,6.2c0.3,0,0.6-0.3,0.8-0.6L18,3.4l1.1,2.2c0.2,0.3,0.5,0.5,0.8,0.6l2.4,0.3l-1.7,1.7
                         c-0.2,0.2-0.4,0.6-0.3,0.9l0.4,2.4l-2.1-1.1c-0.2-0.1-0.3-0.1-0.5-0.1c-0.2,0-0.3,0-0.5,0.1l-2.1,1.1l0.4-2.4
                         c0.1-0.3-0.1-0.7-0.3-0.9l-1.7-1.7L16.1,6.2z" />
-                            <path class="st0" d="M32.1,23.7h-4.5c-0.6,0-1.2,0.2-1.8,0.4v-3.3c0-2.1-1.7-3.9-3.9-3.9H14c-2.1,0-3.9,1.7-3.9,3.9v0.5
+                                <path class="st0" d="M32.1,23.7h-4.5c-0.6,0-1.2,0.2-1.8,0.4v-3.3c0-2.1-1.7-3.9-3.9-3.9H14c-2.1,0-3.9,1.7-3.9,3.9v0.5
                         c-0.5-0.3-1.1-0.4-1.8-0.4H3.9c-2.1,0-3.9,1.7-3.9,3.9v10.2C0,35.5,0.5,36,1.1,36h33.9c0.6,0,1.1-0.5,1.1-1.1v-7.3
                         C36,25.5,34.3,23.7,32.1,23.7z M2.1,24.8c0-1,0.8-1.8,1.8-1.8h4.5c1,0,1.8,0.8,1.8,1.8v9.1H2.1V24.8z M12.3,24.8v-4
                         c0-1,0.8-1.8,1.8-1.8H22c1,0,1.8,0.8,1.8,1.8v13.1H12.3V24.8z M33.9,33.9h-8.1v-6.3c0-1,0.8-1.8,1.8-1.8h4.5c1,0,1.8,0.8,1.8,1.8
                         V33.9z" />
-                        </g>
-                    </svg>
-                    <span>LEADERBOARD</span>
-                </li>
-            </ul>
-        </nb-card-body>
-        <nb-card-footer>
-            <div class="buttons-prev-next d-flex justify-content-center">
-                <button class="button-next" *ngIf="allCat[categoryIndex]" hero nbButton (click)="nextStep()"
-                    shape="semi-round" [disabled]="nextDisabled" status="info">{{'web.Next' | translate}} <nb-icon
-                        icon="arrow-forward-outline"></nb-icon></button>
-            </div>
-        </nb-card-footer>
-    </ng-container>
-    <ng-container *ngIf="case==='report'">
-        <nb-card-body>
-            <!-- <test-game-report></test-game-report> -->
-            <button *ngIf="showUserAnswer" class="button" hero nbButton shape="semi-round" status="info">Show My
-                answer
-            </button>
-            <div class="col-md-12 buttons-footer" style="margin-top:5vh">
-                <div class=" row col-md-12">
-                    <div class="col-md-3">
-                    </div>
-                    <div class="col-md-3">Contestant</div>
-                    <div class="col-md-3">Time</div>
-                    <div class="col-md-3">Score</div>
+                            </g>
+                        </svg>
+                        <span>LEADERBOARD</span>
+                    </li>
+                </ul>
+            </nb-card-body>
+            <nb-card-footer>
+                <div class="buttons-prev-next d-flex justify-content-center">
+                    <button class="button-next" *ngIf="allCat[categoryIndex]" hero nbButton (click)="nextStep()"
+                        shape="semi-round" [disabled]="nextDisabled" status="info">{{'web.Next' | translate}} <nb-icon
+                            icon="arrow-forward-outline"></nb-icon></button>
                 </div>
-                <div class=" row col-md-12">
-                    <div class="col-md-3">
-                        1
-                    </div>
-                    <div class="col-md-3">adsa</div>
-                    <div class="col-md-3">{{time | timing}}</div>
-                    <div class="col-md-3">{{score}}</div>
-                </div>
-            </div>
-            <div *ngIf="isLeaderBoard" class="col-md-12 buttons-footer" style="margin-top:5vh">
-            </div>
-        </nb-card-body>
-
-        <nb-card-footer>
-            <div *ngIf="playability=='play-multiple'" class="col-md-12 buttons-footer">
-                <button class="button" hero nbButton (click)="eventMain('playGame')" shape="semi-round"
-                    status="info">Play
-                    Again
+            </nb-card-footer>
+        </ng-container>
+        <ng-container *ngIf="case==='report'">
+            <nb-card-body>
+                <!-- <test-game-report></test-game-report> -->
+                <button *ngIf="showUserAnswer" class="button" hero nbButton shape="semi-round" status="info">Show My
+                    answer
                 </button>
-            </div>
-        </nb-card-footer>
-
-    </ng-container>
-    <ng-container *ngIf="case==='showLeaderBoard'">
-        <nb-card style="width: 75vh;height:50vh">
-            <div class="col-md-12 ">
-                Leader Board
-            </div>
-        </nb-card>
-        <nb-card-footer>
-            <div class="col-md-12 buttons-footer">
-                <button class="button" hero nbButton (click)="goBack()" shape="semi-round" status="info">Go
-                    Back</button>
-            </div>
-        </nb-card-footer>
-    </ng-container>
-    <ng-container *ngIf="case==='showGifts'">
-        <nb-card style="width: 100vh;height:75vh">
-            <nb-card-header>
-                <div class="col-md-12" style="text-align: center;">
-                    Gifts
+                <div class="col-md-12 buttons-footer" style="margin-top:5vh">
+                    <div class=" row col-md-12">
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-3">Contestant</div>
+                        <div class="col-md-3">Time</div>
+                        <div class="col-md-3">Score</div>
+                    </div>
+                    <div class=" row col-md-12">
+                        <div class="col-md-3">
+                            1
+                        </div>
+                        <div class="col-md-3">adsa</div>
+                        <div class="col-md-3">{{time | timing}}</div>
+                        <div class="col-md-3">{{score}}</div>
+                    </div>
                 </div>
-            </nb-card-header>
-            <test-game-gifts [gameData]="gameData"></test-game-gifts>
+                <div *ngIf="isLeaderBoard" class="col-md-12 buttons-footer" style="margin-top:5vh">
+                </div>
+            </nb-card-body>
+
+            <nb-card-footer>
+                <div *ngIf="playability=='play-multiple'" class="col-md-12 buttons-footer">
+                    <button class="button" hero nbButton (click)="eventMain('playGame')" shape="semi-round"
+                        status="info">Play
+                        Again
+                    </button>
+                </div>
+            </nb-card-footer>
+
+        </ng-container>
+        <ng-container *ngIf="case==='showLeaderBoard'">
+            <nb-card style="width: 75vh;height:50vh">
+                <div class="col-md-12 ">
+                    Leader Board
+                </div>
+            </nb-card>
             <nb-card-footer>
                 <div class="col-md-12 buttons-footer">
                     <button class="button" hero nbButton (click)="goBack()" shape="semi-round" status="info">Go
                         Back</button>
                 </div>
             </nb-card-footer>
-        </nb-card>
-    </ng-container>
-</nb-card>
+        </ng-container>
+        <ng-container *ngIf="case==='showGifts'">
+            <nb-card style="width: 100vh;height:75vh">
+                <nb-card-header>
+                    <div class="col-md-12" style="text-align: center;">
+                        Gifts
+                    </div>
+                </nb-card-header>
+                <test-game-gifts [gameData]="gameData"></test-game-gifts>
+                <nb-card-footer>
+                    <div class="col-md-12 buttons-footer">
+                        <button class="button" hero nbButton (click)="goBack()" shape="semi-round" status="info">Go
+                            Back</button>
+                    </div>
+                </nb-card-footer>
+            </nb-card>
+        </ng-container>
+    </nb-card>
+</ng-container>

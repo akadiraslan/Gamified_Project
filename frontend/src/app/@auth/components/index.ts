@@ -1,7 +1,6 @@
 export * from './login/login.component';
 export * from './auth-block/auth-block.component';
 export * from './logout/logout.component';
-export * from './otp/otp.component';
 export * from './change-email/change-email.component';
 export * from './register/register.component';
 export * from './request-password/request-password.component';
