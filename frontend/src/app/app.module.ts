@@ -36,10 +36,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import {NgxPermissionsModule} from 'ngx-permissions';
+import { NgxPermissionsModule } from 'ngx-permissions';
 import { APP_BASE_HREF } from '@angular/common';
 import { NgPaymentCardModule } from 'ng-payment-card';
 
+import { StorageService } from './services/storage.service';
 
 @NgModule({
     declarations: [AppComponent],
@@ -80,7 +81,7 @@ import { NgPaymentCardModule } from 'ng-payment-card';
             useValue: window['base-href']
         },
 
-        AuthService, ApiService
+        AuthService, ApiService, StorageService
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

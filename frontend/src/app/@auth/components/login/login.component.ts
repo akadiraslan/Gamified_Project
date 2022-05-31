@@ -15,6 +15,10 @@ import { Observable } from 'rxjs';
 import { authOptions } from '../../auth.settings';
 import { ERROR } from '../../../@core/data/data';
 import { environment } from '../../../../environments/environment';
+import { GameService } from '../../../@core/mock/common/game.service';
+import { MessageService } from 'app/@core/mock/common/message.service';
+import { StorageService } from 'app/services/storage.service';
+import { id } from '@swimlane/ngx-charts';
 
 @Component({
     selector: 'ngx-login',
@@ -53,7 +57,9 @@ export class NgxLoginComponent extends BaseComponent implements OnInit {
         private fb: FormBuilder,
         protected router: Router,
         private authService: AuthService,
-        private store: Store<fromRoot.State>) {
+        private store: Store<fromRoot.State>, private gameService: GameService,
+        private messageService: MessageService, private storageService: StorageService
+    ) {
         super();
         this.getState = this.store.select(fromRoot.selectAuthListState$);
     }
@@ -89,23 +95,20 @@ export class NgxLoginComponent extends BaseComponent implements OnInit {
 
 
     login() {
-        this.submitted = true;
         this.spinnerShow();
-        this.store.dispatch(new authActions.Login(this.loginForm.value));
-        this.submitted = false;
-        this.store.subscribe((data: any) => {
-            if (data.auth.user !== null && data.auth.user.data.confirmation_token) {
-                this.router.navigateByUrl('/auth/otp');
+        this.gameService.loginService(this.loginForm.value).subscribe((data: any) => {
+            console.log(this.loginForm.value);
+            if (data) {
+                this.messageService.loginData = data;
+                this.storageService.clearStorage();
+                this.storageService.setUserId(data.id);
+
+                this.router.navigateByUrl('/dashboard');
+
             }
-        }, error => {
             this.spinnerHide();
-            this.submitted = false;
-            this.showMessage(
-                this.translate('title.Login'),
-                this.translate(error.error),
-                ERROR
-            );
         });
+
 
     }
 

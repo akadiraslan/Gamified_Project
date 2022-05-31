@@ -22,6 +22,11 @@ export class GameService {
         return this.apiService.get('http://localhost:8080/api/questions').pipe();
     }
 
+    loginService(data: any): Observable<any> {
+        return this.apiService.get('http://localhost:8080/api/user/' + data.email + '' + '/' + data.password
+            + '').pipe();
+    }
+
     updateGame(gameId: number, data: any): Observable<any> {
         return this.apiService.put(`${Route.GAMES}` + '/' + gameId, data).pipe(catchError(this.formatError));
     }

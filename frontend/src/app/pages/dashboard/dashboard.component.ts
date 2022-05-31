@@ -35,15 +35,7 @@ export class DashboardComponent extends BaseComponent implements OnInit, OnDestr
     }
 
     ngOnInit(): void {
-        this.getReport();
-    }
-
-    getReport() {
-        this.spinnerShow();
-        const sendData = {
-            organisation_id: this.messageService.organisationId ?? null,
-
-        };
+     
         this.gameService.getExample().subscribe((data: any) => {
             console.log(data);
 

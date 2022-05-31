@@ -166,34 +166,6 @@ export class NgxRegisterComponent extends BaseComponent implements OnInit {
 
     }
 
-    checkDomain() {
-        this.spinnerShow();
-        this.authService.checkDomain({ domainName: this.domainName.value }).subscribe(
-            (data: any) => {
-
-                this.spinnerHide();
-                if (!data.success) {
-                    this.setDomainName();
-                    this.showMessage(
-                        this.translate('title.Check Domain Name'),
-                        this.translate(data.message),
-                        ERROR
-                    );
-                } else {
-                    this.domainName.setValue(data.data);
-                }
-
-            },
-            error => {
-                this.spinnerHide();
-                this.showMessage(
-                    this.translate('title.Check Domain Name'),
-                    this.translate(error.error.message),
-                    ERROR
-                );
-            }
-        );
-    }
 
     numberOnly(event: any) {
         const charCode = (event.which) ? event.which : event.keyCode;

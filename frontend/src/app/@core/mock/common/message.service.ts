@@ -31,7 +31,6 @@ export class MessageService {
     private messageSource8 = new BehaviorSubject(null);
     setToggle = this.messageSource8.asObservable();
 
-    private messageSource9 = new BehaviorSubject(null);
     changeCreditCardData = this.messageSource7.asObservable();
 
     public questionFirstShow = true;
@@ -92,9 +91,6 @@ export class MessageService {
         this.messageSource8.next(message);
     }
 
-    sendCreditCardData(message: any) {
-        this.messageSource9.next(message);
-    }
-
+    loginData: any;
 
 }

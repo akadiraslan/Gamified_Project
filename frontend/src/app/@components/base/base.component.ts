@@ -24,11 +24,6 @@ export abstract class BaseComponent {
         this.permissionsService = AppInjectorService.injector.get(NgxPermissionsService);
     }
 
-    checkDemoUser() {
-        const role = this.permissionsService.getPermission(DEMO);
-        return !!role;
-    }
-
     handleResponse(data) {
         this.messages = [];
         this.messages.push(data.message);

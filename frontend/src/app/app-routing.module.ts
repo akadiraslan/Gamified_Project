@@ -10,7 +10,7 @@ const routes: Routes = [
     },
     {
         path: '',
-        // canActivate: [AuthGuard, DomainGuard],
+        canActivate: [],
         loadChildren: () => import('app/pages/pages.module').then(m => m.PagesModule),
     },
     { path: '**', redirectTo: 'pages' },

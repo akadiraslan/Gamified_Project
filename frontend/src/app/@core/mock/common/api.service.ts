@@ -41,7 +41,7 @@ export class ApiService {
     }
 
     post(path: string, params: HttpParams = new HttpParams()): Observable<any> {
-        return this.http.post(this.url + path, JSON.stringify(params), this.httpOptions)
+        return this.http.post(path, JSON.stringify(params), this.httpOptions)
             .pipe(catchError(this.formatError));
     }
 
