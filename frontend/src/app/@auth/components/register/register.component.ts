@@ -7,6 +7,7 @@ import { AuthService } from '../../../services/auth.service';
 import { ERROR, NAME, SUCCESS } from '../../../@core/data/data';
 import { Route } from '../../../@core/data/route';
 import { authOptions } from '../../auth.settings';
+import { GameService } from 'app/@core/mock/common/game.service';
 
 @Component({
     selector: 'ngx-register',
@@ -42,7 +43,7 @@ export class NgxRegisterComponent extends BaseComponent implements OnInit {
 
     constructor(private fb: FormBuilder,
         private authService: AuthService,
-        protected router: Router) {
+        protected router: Router, private gameService: GameService) {
         super();
     }
 
@@ -129,9 +130,29 @@ export class NgxRegisterComponent extends BaseComponent implements OnInit {
 
         this.errors = this.messages = [];
         this.submitted = true;
-        this.spinnerShow();
         console.log(this.registerForm);
+        this.spinnerShow();
+        this.gameService.registerService(this.registerForm.value).subscribe((data: any) => {
+            this.spinnerHide();
+            if (!data.errmsg) {
+                this.showMessage(
+                    this.translate('Registered'),
+                    this.translate('You are registered succesfully'),
+                    SUCCESS,
+                    Route.PUBLIC.LOGIN
+                )
+                this.router.navigateByUrl('/auth/login');
+            } else {
+                this.showMessage(
+                    this.translate('Error'),
+                    this.translate('User already exists with this email'),
+                    ERROR
+                );;
+                console.log(data);
 
+            }
+            this.spinnerHide();
+        });
         // this.authService.signUp(this.registerForm.value).subscribe(
         //     (data: any) => {
         //         this.submitted = false;
