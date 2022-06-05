@@ -18,8 +18,10 @@ const addReport = async (req, res, next) => {
 const getAllReports = async (req, res, next) => {
     try {
         const reports = await firestore.collection('reports');
+        const tests = await firestore.collection('tests');
         const data = await reports.get();
         const reportsArray = [];
+        const test_data = await tests.get();
         if(data.empty) {
             res.status(404).send('No report record found');
         }else {
@@ -28,7 +30,8 @@ const getAllReports = async (req, res, next) => {
                     doc.id,
                     doc.data().user_id,
                     doc.data().test_id,
-                    doc.data().score
+                    doc.data().score,
+                    doc.data().test_name
                 );
                 reportsArray.push(report);
             });
@@ -54,7 +57,8 @@ const getReportsByTestID = async (req, res, next) => {
                         doc.id,
                         doc.data().user_id,
                         doc.data().test_id,
-                        doc.data().score
+                        doc.data().score,
+                        doc.data().test_name
                     );
                     reportsArray.push(report);
                 }
@@ -97,7 +101,8 @@ const getReportByUserID = async (req, res, next) => {
                         doc.id,
                         doc.data().user_id,
                         doc.data().test_id,
-                        doc.data().score
+                        doc.data().score,
+                        doc.data().test_name
                     );
                     reportsArray.push(report);
                 }
