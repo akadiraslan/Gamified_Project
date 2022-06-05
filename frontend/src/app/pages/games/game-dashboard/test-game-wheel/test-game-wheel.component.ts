@@ -284,6 +284,7 @@ export class TestGameWheelComponent implements OnInit {
   }
   repotData = [];
   source: LocalDataSource = new LocalDataSource();
+
   eventMain($event) {
     switch ($event) {
       case 'showLeaderBoard':
