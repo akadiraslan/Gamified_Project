@@ -1,0 +1,24 @@
+<nb-card>
+    <nb-card-header>
+        <h1>Reports</h1>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="row" style="margin-top:1rem ;display: flex;justify-content: center;">
+            <div class="col-md-4">
+                <nb-select status="info" fullWidth [selected]="reportData[0]?.test_id" shape="semi-round"
+                    placeholder="Game Name" (selectedChange)="changeReportId($event)">
+                    <nb-option *ngFor="let reportDat of reportData" [value]="reportDat?.test_id">
+                        {{reportDat.test_name }}</nb-option>
+                </nb-select>
+            </div>
+        </div>
+        <div class="row" style="margin-top:1rem ;display: flex;justify-content: center;">
+            <ng2-smart-table class="example-smart-table" [settings]="settings" [source]="source">
+            </ng2-smart-table>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+
+    </nb-card-footer>
+
+</nb-card>

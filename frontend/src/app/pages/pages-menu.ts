@@ -14,13 +14,6 @@ export class PagesMenu {
 
         const menu: NbMenuItem[] = [
             {
-                title: 'Dashboard',
-                icon: 'home-outline',
-                link: '/dashboard',
-                home: true,
-                children: undefined,
-            },
-            {
                 title: 'Games',
                 icon: 'grid-outline',
                 link: '/games',
@@ -30,6 +23,14 @@ export class PagesMenu {
                 title: 'Report',
                 icon: 'pie-chart-outline',
                 link: '/report',
+                children: undefined,
+            },
+
+            {
+                title: 'Gifts',
+                icon: 'gift-outline',
+                link: '/gifts',
+                home: true,
                 children: undefined,
             },
         ];

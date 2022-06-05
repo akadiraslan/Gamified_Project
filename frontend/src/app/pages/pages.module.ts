@@ -8,7 +8,8 @@ import { PagesMenu } from './pages-menu';
 import { SharedModule } from '../shared/shared.module';
 import { DialogMessageComponent } from 'app/@components/dialog-message/dialog-message.component';
 import { NbContextMenuModule, NbMenuModule } from '@nebular/theme';
-import { DashboardModule } from './dashboard/dashboard.module';
+import { GiftsModule } from './gifts/gifts.module';
+import { ReportModule } from './report/report.module';
 
 const PAGES_COMPONENTS = [
     PagesComponent,
@@ -24,7 +25,8 @@ const PAGES_COMPONENTS = [
         MiscellaneousModule,
         NbMenuModule,
         NbContextMenuModule,
-        DashboardModule
+        GiftsModule,
+        ReportModule
     ],
     declarations: [
         ...PAGES_COMPONENTS,

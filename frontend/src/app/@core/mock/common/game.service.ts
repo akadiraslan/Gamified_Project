@@ -39,54 +39,27 @@ export class GameService {
         return this.apiService.post('http://localhost:8080/api/user', data).pipe();
     }
 
-    updateGame(gameId: number, data: any): Observable<any> {
-        return this.apiService.put(`${Route.GAMES}` + '/' + gameId, data).pipe(catchError(this.formatError));
+    getAllReport(): Observable<any> {
+        return this.apiService.get('http://localhost:8080/api/reports').pipe();
     }
 
-    getGames(page: any = null, limit: number = 12, organisationId: number = null): Observable<any> {
-
-        if (page === null) {
-            if (organisationId === null) {
-                return this.apiService.get(`${Route.GAMES}`).pipe(catchError(this.formatError));
-            } else {
-                return this.apiService.get(`${Route.GAMES}` +
-                    '?organisation_id=' + organisationId).pipe(catchError(this.formatError));
-            }
-        } else {
-            if (organisationId === null) {
-                return this.apiService.get(`${Route.GAMES}` + '?page=' + page + '&limit=' + limit)
-                    .pipe(catchError(this.formatError));
-            } else {
-                return this.apiService.get(`${Route.GAMES}` + '?page=' + page + '&limit=' +
-                    limit + '&organisation_id=' + organisationId)
-                    .pipe(catchError(this.formatError));
-            }
-
-        }
+    getReport(data: any): Observable<any> {
+        return this.apiService.get('http://localhost:8080/api/report/test/' + data + '').pipe();
     }
 
-    getGame(id: number): Observable<any> {
-        return this.apiService.get(`${Route.GAMES}` + '/' + id)
-            .pipe(catchError(this.formatError));
+    getUserName(data: any): Observable<any> {
+        return this.apiService.get('http://localhost:8080/api/user/' + data + '').pipe();
     }
 
-    getScormPackage(gameId: any, version: string): Observable<any> {
-        return this.apiService.download(`${Route.SCORM_DOWNLOAD}` + '/' + gameId + '/' + version)
-            .pipe(catchError(this.formatError));
+    setScore(data: any): Observable<any> {
+        return this.apiService.post('http://localhost:8080/api/report', data).pipe();
     }
-
-    download(path: any): Observable<any> {
-        return this.apiService.download(path)
-            .pipe(catchError(this.formatError));
+    getGifts(): Observable<any> {
+        return this.apiService.get('http://localhost:8080/api/gifts').pipe();
     }
 
     formatError(error: any) {
         return of(environment.apiUrl + error.error);
-    }
-
-    checkGame(data: any): Observable<any> {
-        return this.apiService.get(`${Route.CHECK_GAME}`, data)
-            .pipe(catchError(this.formatError));
     }
 
 

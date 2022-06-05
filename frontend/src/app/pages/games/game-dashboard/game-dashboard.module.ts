@@ -14,7 +14,7 @@ import { NgxWheelModule } from 'ngx-wheel';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { GiftsComponent } from './test-game-wheel/gifts/gifts.component';
 import { NgxAudioPlayerModule } from 'ngx-audio-player';
-
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 @NgModule({
     imports: [
         SharedModule,
@@ -24,6 +24,7 @@ import { NgxAudioPlayerModule } from 'ngx-audio-player';
         NgxWheelModule,
         DragDropModule,
         NgxAudioPlayerModule,
+        Ng2SmartTableModule
     ],
     declarations: [
         SelectionComponent,

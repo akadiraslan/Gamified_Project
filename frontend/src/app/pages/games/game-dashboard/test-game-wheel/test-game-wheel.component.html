@@ -1,5 +1,3 @@
-<!-- <mat-basic-audio-player [audioUrl]="msbapAudioUrl[0]" [autoPlay]="false" muted="muted" [displayVolumeControls]="msaapDisplayVolumeControls">
-</mat-basic-audio-player> -->
 <ng-container *ngIf="case==='games'">
     <nb-card>
         <nb-card-header>
@@ -7,12 +5,13 @@
         </nb-card-header>
         <nb-card-body>
             <div class="row" style="display:flex;justify-content:center;margin-top: 1rem;">
-                <nb-card class="card-new col-md-4" *ngFor="let testGame of testGames;let i=index">
+                <nb-card class="card-new col-md-3" style="margin-right: 1rem;"
+                    *ngFor="let testGame of testGames;let i=index">
                     <nb-card-header style="text-align:center">Game {{i+1}}</nb-card-header>
                     <nb-card-body>
 
                         <button nbButton fullWidth status="primary" size="medium" shape="round"
-                            (click)="openGame(testGame.id)">
+                            (click)="openGame(testGame)">
                             <i style="margin-right: 1rem;" class="fas fa-3x fa-solid fa-gamepad"></i>
                             {{ testGame.name}}
                         </button>
@@ -53,7 +52,7 @@
                             </div>
                             <div class="col-md-6 buttons mb-4">
                                 <button class="btn-intro" fullWidth nbButton hero status="info" shape="semi-round"
-                                    (click)="eventMain('Leader_Board')"
+                                    (click)="eventMain('showLeaderBoard')"
                                     [@bounceInRight]="{ value: animationState, params: { duration: 1750, delay: 600 } }">
                                     <svg x="0px" y="0px" viewBox="0 0 36 36">
                                         <g>
@@ -75,7 +74,7 @@
                             </div>
                             <div class="col-md-6 buttons" *ngIf="isGift">
                                 <button nbButton hero fullWidth status="info" shape="semi-round"
-                                    (click)="eventMain('gifts')"
+                                    (click)="eventMain('showGifts')"
                                     [@bounceInRight]="{ value: animationState, params: { duration: 1750, delay: 900 } }">
                                     <svg viewBox="0 0 36 36">
                                         <g>
@@ -286,7 +285,7 @@
                                             <img [src]="getBaseUrl() + '/assets/skins/lightgray/img/j-half.png'">
                                         </button>
                                     </div>
-                                    <div class="joker doubleAnswer float-right" *ngIf="isDoubleAnswer===1">
+                                    <!-- <div class="joker doubleAnswer float-right" *ngIf="isDoubleAnswer===1">
                                         <button nbTooltip="Double Answer"
                                             [ngClass]="{jokerShow:  isDoubleAnswer===1, jokerHide: isDoubleAnswer!==1}"
                                             [@bounceInDown]="{ value: animationJokers, params: { duration: 1750, delay: 900 } }"
@@ -294,7 +293,7 @@
                                             status="primary">
                                             <img [src]="getBaseUrl() + '/assets/skins/lightgray/img/j-double.png'">
                                         </button>
-                                    </div>
+                                    </div> -->
                                     <div class="joker deleteOneAnswer float-right" *ngIf="isDeleteOneOption===1">
                                         <button nbTooltip="Delete One Answer"
                                             [ngClass]="{jokerShow: isDeleteOneOption===1, jokerHide: isDeleteOneOption!==1}"
@@ -404,6 +403,10 @@
                     </div>
                 </div>
                 <div *ngIf="isLeaderBoard" class="col-md-12 buttons-footer" style="margin-top:5vh">
+                    <div class="row" style="display:flex;justify-content:center">
+                        <ng2-smart-table class="example-smart-table" [settings]="settings" [source]="source">
+                        </ng2-smart-table>
+                    </div>
                 </div>
             </nb-card-body>
 
@@ -418,11 +421,20 @@
 
         </ng-container>
         <ng-container *ngIf="case==='showLeaderBoard'">
-            <nb-card style="width: 75vh;height:50vh">
-                <div class="col-md-12 ">
-                    Leader Board
-                </div>
-            </nb-card>
+            <!-- <nb-card>
+                <nb-card-header> -->
+            <h1 style="text-align: center;">
+                Leader Board
+            </h1>
+            <!-- </nb-card-header> -->
+
+            <!-- <nb-card-body> -->
+            <div class="row" style="display:flex;justify-content:center">
+                <ng2-smart-table class="example-smart-table" [settings]="settings" [source]="source">
+                </ng2-smart-table>
+            </div>
+            <!-- </nb-card-body>
+            </nb-card> -->
             <nb-card-footer>
                 <div class="col-md-12 buttons-footer">
                     <button class="button" hero nbButton (click)="goBack()" shape="semi-round" status="info">Go
@@ -431,13 +443,10 @@
             </nb-card-footer>
         </ng-container>
         <ng-container *ngIf="case==='showGifts'">
-            <nb-card style="width: 100vh;height:75vh">
-                <nb-card-header>
-                    <div class="col-md-12" style="text-align: center;">
-                        Gifts
-                    </div>
-                </nb-card-header>
-                <test-game-gifts [gameData]="gameData"></test-game-gifts>
+            <nb-card>
+                <nb-card-body>
+                    <test-gifts></test-gifts>
+                </nb-card-body>
                 <nb-card-footer>
                     <div class="col-md-12 buttons-footer">
                         <button class="button" hero nbButton (click)="goBack()" shape="semi-round" status="info">Go

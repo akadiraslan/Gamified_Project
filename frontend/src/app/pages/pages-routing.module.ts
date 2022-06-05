@@ -5,23 +5,24 @@ import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import { GameDashboardComponent } from './games/game-dashboard/game-dashboard.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { GiftsComponent } from './gifts/gifts.component';
+import { ReportComponent } from './report/report.component';
 
 const routes: Routes = [{
     path: '',
     component: PagesComponent,
     children: [
         {
-            path: 'dashboard',
-            component: DashboardComponent,
-        },
-        {
             path: 'games',
             component: GameDashboardComponent,
         },
         {
             path: 'report',
-
+            component: ReportComponent,
+        },
+        {
+            path: 'gifts',
+            component: GiftsComponent,
         },
         {
             path: 'users',

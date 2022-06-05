@@ -19,7 +19,8 @@ import {
 } from 'angular-animations';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { GameService } from 'app/@core/mock/common/game.service';
-
+import { StorageService } from 'app/services/storage.service';
+import { LocalDataSource } from 'ng2-smart-table';
 @Component({
   selector: 'test-game-wheel',
   styleUrls: ['./test-game-wheel.component.scss'],
@@ -115,17 +116,56 @@ export class TestGameWheelComponent implements OnInit {
   solvedQuestion = 0;
   totalQuestion = 0;
   testGames: any;
-  constructor(private gameService: GameService) { }
+  testGameId: number;
+  testName: string;
+  settings = {
+    actions: {
+      add: false,
+      edit: false,
+      delete: false,
+    },
+    add: {
+      addButtonContent: '<i class="nb-plus"></i>',
+      createButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+    },
+    edit: {
+      editButtonContent: '<i class="nb-edit"></i>',
+      saveButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+    },
+    delete: {
+      deleteButtonContent: '<i class="nb-trash"></i>',
+      confirmDelete: true,
+    },
+    columns: {
+      name: {
+        title: 'User name',
+        type: 'string',
+      },
+      email: {
+        title: 'User Email',
+        type: 'email',
+      },
+      score: {
+        title: 'Score',
+        type: 'number',
+      },
+    },
+  };
+  constructor(private gameService: GameService, private storageService: StorageService) { }
 
   ngOnInit(): void {
     this.getGames();
 
   }
   openGame(event) {
-    this.gameService.getTestService(event).subscribe((data: any) => {
+    this.gameService.getTestService(event.id).subscribe((data: any) => {
       console.log('data');
       console.log(data);
       this.gameData = data;
+      this.testGameId = event.id;
+      this.testName = event.name
       this.case = 'main';
       this.setGameSettings();
       this.animate();
@@ -242,11 +282,29 @@ export class TestGameWheelComponent implements OnInit {
       textFontSize: '16'
     }));
   }
-
+  repotData = [];
+  source: LocalDataSource = new LocalDataSource();
   eventMain($event) {
     switch ($event) {
       case 'showLeaderBoard':
         this.case = 'showLeaderBoard';
+        this.repotData = [];
+        this.gameService.getReport(this.testGameId).subscribe((data: any) => {
+          console.log('data');
+          console.log(data);
+          data.forEach(dat => {
+            this.gameService.getUserName(dat.user_id).subscribe((userNam: any) => {
+              this.repotData.push({
+                name: userNam.name, score: dat.score, email: userNam.email
+              })
+            });
+          });
+        });
+        setTimeout(() => {
+          this.source.load(this.repotData);
+          console.log(this.repotData);
+
+        }, 1000);
         break;
       case 'playGame':
         this.case = 'wheel';
@@ -361,6 +419,16 @@ export class TestGameWheelComponent implements OnInit {
         this.countDown = null;
         this.case = 'report';
         this.score = Number(this.score.toFixed(2));
+        const sendData = {
+          user_id: this.storageService.getUserId(),
+          test_id: this.testGameId,
+          test_name: this.testName,
+          score: this.score,
+        }
+        this.gameService.setScore(sendData).subscribe((data: any) => {
+          console.log('setted');
+
+        });
       }
     } if (this.child) {
       this.showCorrectAnswer ? this.isCorrectAnswer = true : this.isCorrectAnswer = false;
@@ -420,7 +488,18 @@ export class TestGameWheelComponent implements OnInit {
             this.countUp.unsubscribe();
             this.countDown = null;
             this.case = 'report';
+
             this.score = Number(this.score.toFixed(2));
+            const sendData = {
+              user_id: this.storageService.getUserId(),
+              test_id: this.testGameId,
+              test_name: this.testName,
+              score: this.score,
+            }
+            this.gameService.setScore(sendData).subscribe((data: any) => {
+              console.log('setted');
+
+            });
           }
 
         }, 4000);
@@ -443,6 +522,16 @@ export class TestGameWheelComponent implements OnInit {
           this.countDown = null;
           this.case = 'report';
           this.score = Number(this.score.toFixed(2));
+          const sendData = {
+            user_id: this.storageService.getUserId(),
+            test_id: this.testGameId,
+            test_name: this.testName,
+            score: this.score,
+          }
+          this.gameService.setScore(sendData).subscribe((data: any) => {
+            console.log('setted');
+
+          });
         }
         for (let i = 0; i < this.child?.disabled?.length; i++) {
           this.child.disabled[i] = false;

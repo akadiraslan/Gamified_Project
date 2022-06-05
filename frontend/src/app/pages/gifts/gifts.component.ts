@@ -1,28 +1,33 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { bounceInAnimation, flipAnimation, tadaAnimation } from 'angular-animations';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NbColorHelper, NbThemeService } from '@nebular/theme';
+import { ReportService } from 'app/@core/mock/common/report.service';
+import { BaseComponent } from '../../@components/base/base.component';
+import { ChartTypes, DataTypes } from 'app/@core/data/chart';
+import { Types } from 'app/@core/model/report';
+import { MessageService } from 'app/@core/mock/common/message.service';
 import { GameService } from 'app/@core/mock/common/game.service';
-import { environment } from 'environments/environment';
+import { ApiService } from 'app/@core/mock/common/api.service';
 import { LocalDataSource } from 'ng2-smart-table';
 
 
 @Component({
-    selector: 'test-gifts',
+    selector: 'gifts',
     templateUrl: './gifts.component.html',
-    styleUrls: ['./gifts.component.scss'],
-    animations: [
-        bounceInAnimation(),
-        flipAnimation(),
-        tadaAnimation(),
-    ],
+    styleUrls: ['./gifts.component.scss']
 })
-export class GiftsComponent implements OnInit {
+export class GiftsComponent extends BaseComponent implements OnInit, OnDestroy {
+    data: any;
+    options: any;
+    themeSubscription: any;
+    organisationId: any;
+    games = [];
+    charts: Types[] = ChartTypes;
+    totalQuestion = [];
+    totalCorrect = [];
+    totalWrong = [];
+    case = 'barChart';
 
-    @Input() gameData: any;
-    baseUrl = environment.baseUrl + '/';
-    imageDirectory: any;
-    giftIndex = 0;
-    giftItems: any;
-    animationState = false;
+    dataTypes = DataTypes;
     settings = {
         actions: {
             add: false,
@@ -56,10 +61,15 @@ export class GiftsComponent implements OnInit {
     };
     gifts = [];
     source: LocalDataSource = new LocalDataSource();
-    constructor(private gameService: GameService) {
+
+    constructor(private theme: NbThemeService, private reportService: ReportService,
+        private messageService: MessageService, private gameService: GameService,
+        private apiService: ApiService) {
+        super();
     }
 
     ngOnInit(): void {
+
         this.gameService.getGifts().subscribe((data: any) => {
 
             this.gifts = data[0].gifts;
@@ -67,14 +77,14 @@ export class GiftsComponent implements OnInit {
         });
     }
 
-
     getGifts() {
 
         const tableData = [];
+        this.spinnerHide();
         console.log('data');
         this.gifts.forEach((dat, index) => {
             tableData.push({
-                order: index + 1, name: dat.gift
+                order: index+1, name: dat.gift
             })
         });
         setTimeout(() => {
@@ -82,5 +92,9 @@ export class GiftsComponent implements OnInit {
         }, 1000);
     }
 
+
+    ngOnDestroy(): void {
+        this.themeSubscription ? this.themeSubscription.unsubscribe() : null;
+    }
 
 }

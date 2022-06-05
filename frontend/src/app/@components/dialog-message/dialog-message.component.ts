@@ -52,77 +52,9 @@ export class DialogMessageComponent extends BaseComponent implements OnInit {
 
   }
 
-  testGame() {
-    this.spinnerShow();
-    this.gameService.getGame(this.submittedGame['data'].game).subscribe((data: any) => {
-      this.spinnerHide();
-      if (data.success) {
-        this.windowService.open(TestGameWheelComponent, {
-          context: {
-            title: `Test Game Wheel`,
-            gameData: data
-          },
-        });
-      } else {
-        this.showMessage(
-          this.translate('title.Game'),
-          this.translate('games.no_game_error'),
-          ERROR
-        );
-      }
-
-    },
-      error => {
-        this.spinnerHide();
-        this.showMessage(
-          this.translate('title.Game'),
-          this.translate(error.error.message),
-          ERROR
-        );
-      }
-    );
-  }
-
   dismiss() {
     this.controlRm = 0;
     this.ref.close(this.controlRm);
-  }
-
-  downloadScorm() {
-    this.version = this.nbMenuService.onItemClick()
-      .pipe(
-        filter(({ tag }) => tag === 'scorm-context-menu'),
-        map(({ item: { title } }) => title),
-        take(1))
-      .subscribe(title => {
-        this.getScormPackage(this.submittedGame['data'].game, title);
-      });
-  }
-
-  getScormPackage(gameId: number, version: string) {
-    this.spinnerShow();
-    this.gameService.getScormPackage(gameId, version).subscribe((data: any) => {
-      this.version.unsubscribe();
-      this.spinnerHide();
-      if (data.success) {
-        window.location.href = data.data;
-      } else {
-        this.showMessage(
-          this.translate('title.Game'),
-          this.translate(data.message),
-          ERROR
-        );
-      }
-    },
-      error => {
-        this.version.unsubscribe();
-        this.spinnerHide();
-        this.showMessage(
-          this.translate('title.Game'),
-          this.translate(error.error.message),
-          ERROR
-        );
-      });
   }
 
   editGame() {

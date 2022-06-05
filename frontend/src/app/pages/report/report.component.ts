@@ -7,14 +7,15 @@ import { Types } from 'app/@core/model/report';
 import { MessageService } from 'app/@core/mock/common/message.service';
 import { GameService } from 'app/@core/mock/common/game.service';
 import { ApiService } from 'app/@core/mock/common/api.service';
+import { LocalDataSource } from 'ng2-smart-table';
 
 
 @Component({
-    selector: 'dashboard',
-    templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.scss']
+    selector: 'report',
+    templateUrl: './report.component.html',
+    styleUrls: ['./report.component.scss']
 })
-export class DashboardComponent extends BaseComponent implements OnInit, OnDestroy {
+export class ReportComponent extends BaseComponent implements OnInit, OnDestroy {
     data: any;
     options: any;
     themeSubscription: any;
@@ -27,6 +28,43 @@ export class DashboardComponent extends BaseComponent implements OnInit, OnDestr
     case = 'barChart';
 
     dataTypes = DataTypes;
+    reportData = [];
+    settings = {
+        actions: {
+            add: false,
+            edit: false,
+            delete: false,
+        },
+        add: {
+            addButtonContent: '<i class="nb-plus"></i>',
+            createButtonContent: '<i class="nb-checkmark"></i>',
+            cancelButtonContent: '<i class="nb-close"></i>',
+        },
+        edit: {
+            editButtonContent: '<i class="nb-edit"></i>',
+            saveButtonContent: '<i class="nb-checkmark"></i>',
+            cancelButtonContent: '<i class="nb-close"></i>',
+        },
+        delete: {
+            deleteButtonContent: '<i class="nb-trash"></i>',
+            confirmDelete: true,
+        },
+        columns: {
+            name: {
+                title: 'User name',
+                type: 'string',
+            },
+            email: {
+                title: 'User Email',
+                type: 'email',
+            },
+            score: {
+                title: 'Score',
+                type: 'number',
+            },
+        },
+    };
+    source: LocalDataSource = new LocalDataSource();
 
     constructor(private theme: NbThemeService, private reportService: ReportService,
         private messageService: MessageService, private gameService: GameService,
@@ -35,14 +73,35 @@ export class DashboardComponent extends BaseComponent implements OnInit, OnDestr
     }
 
     ngOnInit(): void {
-     
-        this.gameService.getExample().subscribe((data: any) => {
+        this.spinnerShow();
+        this.gameService.getAllReport().subscribe((data: any) => {
+            this.reportData = data;
             console.log(data);
-
             this.spinnerHide();
+            this.changeReportId(data[0].test_id);
         });
     }
 
+    changeReportId($event) {
+
+        const tableData = [];
+        this.gameService.getReport($event).subscribe((data: any) => {
+            this.spinnerHide();
+            console.log('data');
+            console.log(data);
+            data.forEach(dat => {
+                this.gameService.getUserName(dat.user_id).subscribe((userNam: any) => {
+                    tableData.push({
+                        name: userNam.name, score: dat.score, email: userNam.email
+                    })
+                });
+
+            });
+        });
+        setTimeout(() => {
+            this.source.load(tableData);
+        }, 1000);
+    }
 
     changeChart($event) {
         if ($event === this.charts[0].id) {

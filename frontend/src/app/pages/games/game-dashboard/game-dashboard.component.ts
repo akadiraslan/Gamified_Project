@@ -16,27 +16,13 @@ import { MessageService } from '../../../@core/mock/common/message.service';
 export class GameDashboardComponent extends BaseComponent implements OnInit, OnDestroy {
     shortings: Shorting[] = Shortings;
     isMenu = [];
-
-    items = [
-        { title: 'Clone' },
-        { title: 'Test Game' },
-        { title: 'About Game' },
-        { title: 'Remove' },
-
-    ];
     games: any[] = [];
     currentPage = 11;
     totalItems: number;
     limit: number = 11;
     selectedGame: any;
     test: any;
-    scormVersion = [{ title: SCORM_PACKAGE_VERSION.v_12 }, { title: SCORM_PACKAGE_VERSION.v_2004 }];
     version: any;
-    role = {
-        ROLE_USER: USER,
-        ROLE_DEMO: DEMO,
-        ROLE_ADMIN: ADMIN,
-    };
     totalGame: number = 0;
 
     constructor(private gameService: GameService,
@@ -75,10 +61,6 @@ export class GameDashboardComponent extends BaseComponent implements OnInit, OnD
             },
             queryParamsHandling: 'merge',
         });
-    }
-
-    changeOrganisation($event: any) {
-        this.messageService.organisationId = $event;
     }
 
 }
