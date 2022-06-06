@@ -1,5 +1,5 @@
 
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { TypeId } from 'app/@core/data/selectBoxes';
 import { NgxWheelComponent, TextAlignment, TextOrientation } from 'ngx-wheel';
 import { ChoiceComponent } from './choice/choice.component';
@@ -64,7 +64,7 @@ import { MessageService } from 'app/@core/mock/common/message.service';
     ]),
   ],
 })
-export class TestGameWheelComponent implements OnInit {
+export class TestGameWheelComponent implements OnInit, OnDestroy {
 
   @ViewChild(NgxWheelComponent, { static: false }) wheel;
   @ViewChild(ChoiceComponent) childChoice: any;
@@ -670,5 +670,8 @@ export class TestGameWheelComponent implements OnInit {
       baseUrl = '';
     }
     return baseUrl;
+  }
+  ngOnDestroy() {
+    this.audio.pause();
   }
 }
