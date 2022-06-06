@@ -202,3 +202,14 @@
         </button>
     </nb-card-footer>
 </nb-card>
+<nb-card *ngIf="case === 'wrongLogin'">
+    <nb-card-header>{{'warnings.Warning' | translate}}</nb-card-header>
+    <nb-card-body>
+        {{'warnings.User email or password is incorrect.' | translate}}
+    </nb-card-body>
+    <nb-card-footer>
+        <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="dismiss()">{{'web.Dismiss
+            Dialog' | translate}}
+        </button>
+    </nb-card-footer>
+</nb-card>

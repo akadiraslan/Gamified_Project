@@ -5,6 +5,7 @@
     },
     "warnings": {
         "Warning": "Warning",
-        "You cant play this game again because you have played it before.": "You cant play this game again because you've played it before."
+        "You cant play this game again because you have played it before.": "You cant play this game again because you've played it before.",
+        "User email or password is incorrect.": "User email or password is incorrect."
     }
 }

@@ -5,6 +5,7 @@
     },
     "warnings": {
         "Warning": "Uyarı",
-        "You cant play this game again because you have played it before.": "Bu oyunu daha önce oynadığınız için bir daha oynayamazsınız"
+        "You cant play this game again because you have played it before.": "Bu oyunu daha önce oynadığınız için bir daha oynayamazsınız",
+        "User email or password is incorrect.": "Kullanıcı email veya şifre yanlış"
     }
 }

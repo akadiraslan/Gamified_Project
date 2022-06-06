@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 
-import { NbThemeService } from '@nebular/theme';
+import { NbDialogService, NbThemeService } from '@nebular/theme';
 import { EMAIL_PATTERN } from '../constants';
 import { AuthService } from '../../../services/auth.service';
 import { BaseComponent } from 'app/@components/base/base.component';
@@ -19,6 +19,7 @@ import { GameService } from '../../../@core/mock/common/game.service';
 import { MessageService } from 'app/@core/mock/common/message.service';
 import { StorageService } from 'app/services/storage.service';
 import { id } from '@swimlane/ngx-charts';
+import { DialogMessageComponent } from 'app/@components/dialog-message/dialog-message.component';
 
 @Component({
     selector: 'ngx-login',
@@ -58,7 +59,8 @@ export class NgxLoginComponent extends BaseComponent implements OnInit {
         protected router: Router,
         private authService: AuthService,
         private store: Store<fromRoot.State>, private gameService: GameService,
-        private messageService: MessageService, private storageService: StorageService
+        private messageService: MessageService, private storageService: StorageService,
+        private dialogService: NbDialogService
     ) {
         super();
         this.getState = this.store.select(fromRoot.selectAuthListState$);
@@ -105,6 +107,13 @@ export class NgxLoginComponent extends BaseComponent implements OnInit {
 
                 this.router.navigateByUrl('/games');
 
+            } else {
+                this.messageService.sendDialogMessage('wrongLogin');
+                this.dialogService.open(DialogMessageComponent, {
+                    context: {
+                        submitMessage: 'Successfull',
+                    },
+                });
             }
             this.spinnerHide();
         });
