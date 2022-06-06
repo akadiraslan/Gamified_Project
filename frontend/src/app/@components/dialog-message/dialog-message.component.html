@@ -196,10 +196,10 @@
     <nb-card-body>
         {{'warnings.You cant play this game again because you have played it before.' | translate}}
     </nb-card-body>
-    <nb-card-footer>
-        <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="dismiss()">{{'web.Dismiss
-            Dialog' | translate}}
-        </button>
+    <nb-card-footer style="justify-content:center;display: flex;">
+    <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="dismiss()">{{'web.Dismiss
+        Dialog' | translate}}
+    </button>
     </nb-card-footer>
 </nb-card>
 <nb-card *ngIf="case === 'wrongLogin'">
@@ -207,7 +207,7 @@
     <nb-card-body>
         {{'warnings.User email or password is incorrect.' | translate}}
     </nb-card-body>
-    <nb-card-footer>
+    <nb-card-footer style="justify-content:center;display: flex;">
         <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="dismiss()">{{'web.Dismiss
             Dialog' | translate}}
         </button>

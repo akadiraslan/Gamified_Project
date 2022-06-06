@@ -156,6 +156,8 @@ export class TestGameWheelComponent implements OnInit {
       },
     },
   };
+  audio = new Audio();
+
   constructor(private gameService: GameService, private storageService: StorageService,
     private dialogService: NbDialogService, private messageService: MessageService) { }
 
@@ -172,8 +174,7 @@ export class TestGameWheelComponent implements OnInit {
       });
       if (!flag) {
         this.gameService.getTestService(event.id).subscribe((data: any) => {
-          console.log('data');
-          console.log(data);
+
           this.gameData = data;
           this.testGameId = event.id;
           this.testName = event.name
@@ -328,6 +329,8 @@ export class TestGameWheelComponent implements OnInit {
         break;
       case 'playGame':
         this.case = 'wheel';
+        this.audio.src = 'assets/audio/music.mp3';
+        this.audio.play();
         this.animate();
         this.countUp = timer(2000, 1000).subscribe(t => {
           this.time = t;
@@ -354,7 +357,15 @@ export class TestGameWheelComponent implements OnInit {
         break;
     }
   }
-
+  pauseMusic = true;
+  stopMusic() {
+    if (this.pauseMusic) {
+      this.audio.pause();
+      this.pauseMusic = false;;
+    } else {
+      this.audio.play();
+    }
+  }
   shuffle(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
     while (0 !== currentIndex) {

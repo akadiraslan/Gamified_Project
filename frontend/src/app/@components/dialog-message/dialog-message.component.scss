@@ -14,7 +14,10 @@
         text-transform: none !important;
     }
     .dismiss {
-        margin-right: 5vh
+        margin-right: 5vh;
+        text-align: center;
+        justify-content: center;
+        display: flex;
     }
     .dismiss-upload {
         text-align: center;
