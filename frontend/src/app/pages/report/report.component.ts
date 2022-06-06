@@ -96,7 +96,6 @@ export class ReportComponent extends BaseComponent implements OnInit, OnDestroy 
             console.log(tableData);
             this.reportData = tableData;
             console.log(data);
-            this.spinnerHide();
             this.changeReportId(data[0].test_id);
         });
     }
@@ -105,7 +104,7 @@ export class ReportComponent extends BaseComponent implements OnInit, OnDestroy 
 
         const tableData = [];
         this.gameService.getReport($event).subscribe((data: any) => {
-            this.spinnerHide();
+
             console.log('data');
             console.log(data);
             data.forEach(dat => {
@@ -119,6 +118,7 @@ export class ReportComponent extends BaseComponent implements OnInit, OnDestroy 
         });
         setTimeout(() => {
             this.source.load(tableData);
+            this.spinnerHide();
         }, 1000);
     }
 

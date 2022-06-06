@@ -24,6 +24,8 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { DialogMessageComponent } from 'app/@components/dialog-message/dialog-message.component';
 import { NbDialogService } from '@nebular/theme';
 import { MessageService } from 'app/@core/mock/common/message.service';
+import { BaseComponent } from 'app/@components/base/base.component';
+import { F } from '@angular/cdk/keycodes';
 @Component({
   selector: 'test-game-wheel',
   styleUrls: ['./test-game-wheel.component.scss'],
@@ -64,7 +66,7 @@ import { MessageService } from 'app/@core/mock/common/message.service';
     ]),
   ],
 })
-export class TestGameWheelComponent implements OnInit, OnDestroy {
+export class TestGameWheelComponent extends BaseComponent implements OnInit, OnDestroy {
 
   @ViewChild(NgxWheelComponent, { static: false }) wheel;
   @ViewChild(ChoiceComponent) childChoice: any;
@@ -159,7 +161,9 @@ export class TestGameWheelComponent implements OnInit, OnDestroy {
   audio = new Audio();
 
   constructor(private gameService: GameService, private storageService: StorageService,
-    private dialogService: NbDialogService, private messageService: MessageService) { }
+    private dialogService: NbDialogService, private messageService: MessageService) {
+    super();
+  }
 
   ngOnInit(): void {
     this.getGames();
@@ -309,21 +313,22 @@ export class TestGameWheelComponent implements OnInit, OnDestroy {
       case 'showLeaderBoard':
         this.case = 'showLeaderBoard';
         this.repotData = [];
+        this.spinnerShow();
         this.gameService.getReport(this.testGameId).subscribe((data: any) => {
           console.log('data');
           console.log(data);
-          data.forEach(dat => {
+          data.forEach((dat, index) => {
             this.gameService.getUserName(dat.user_id).subscribe((userNam: any) => {
               this.userName = userNam.name;
               this.repotData.push({
                 name: userNam.name, score: dat.score, email: userNam.email
-              })
+              });
             });
           });
         });
         setTimeout(() => {
           this.source.load(this.repotData);
-          console.log(this.repotData);
+          this.spinnerHide();
 
         }, 1000);
         break;
@@ -359,11 +364,10 @@ export class TestGameWheelComponent implements OnInit, OnDestroy {
   }
   pauseMusic = true;
   stopMusic() {
-    if (this.pauseMusic) {
-      this.audio.pause();
-      this.pauseMusic = false;;
-    } else {
+    if (this.audio.paused) {
       this.audio.play();
+    } else {
+      this.audio.pause();
     }
   }
   shuffle(array) {

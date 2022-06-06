@@ -69,7 +69,7 @@ export class GiftsComponent extends BaseComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-
+        this.spinnerShow();
         this.gameService.getGifts().subscribe((data: any) => {
 
             this.gifts = data[0].gifts;
@@ -80,15 +80,15 @@ export class GiftsComponent extends BaseComponent implements OnInit, OnDestroy {
     getGifts() {
 
         const tableData = [];
-        this.spinnerHide();
         console.log('data');
         this.gifts.forEach((dat, index) => {
             tableData.push({
-                order: index+1, name: dat.gift
+                order: index + 1, name: dat.gift
             })
         });
         setTimeout(() => {
             this.source.load(tableData);
+            this.spinnerHide();
         }, 1000);
     }
 
