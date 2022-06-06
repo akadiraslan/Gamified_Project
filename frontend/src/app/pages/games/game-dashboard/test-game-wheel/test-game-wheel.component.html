@@ -157,7 +157,7 @@
                     <img class="icon-spin" [src]="getBaseUrl()+'/assets/skins/lightgray/img/icon-spin.svg'" alt="">
                     <span>Spin!</span>
                 </button>
-                <div class="col-md-12 d-flex justify-content-center wheel-container" style="margin-top: 2vh;"
+                <div class="col-md-12 d-flex justify-content-center wheel-container" style="margin-top: -6vh;"
                     [@bounceIn]="{ value: animationState, params: { duration: 1750} }">
                     <img class="wheel-pointer" [src]="getBaseUrl()+'/assets/skins/lightgray/img/wheel-pointer.png'"
                         alt="">
@@ -178,7 +178,7 @@
                         <span>MUTE</span>
                     </li>
                     <li>
-                        <svg x="0px" y="0px" viewBox="0 0 36 36">
+                        <svg x="0px" y="0px" viewBox="0 0 36 36" (click)="eventMain('showLeaderBoard')">
                             <g>
                                 <path class="st0" d="M13.6,9.4l-0.7,3.9c-0.1,0.4,0.1,0.8,0.4,1c0.2,0.1,0.4,0.2,0.6,0.2c0.2,0,0.3,0,0.5-0.1l3.5-1.9l3.5,1.9
                         c0.2,0.1,0.3,0.1,0.5,0.1c0,0,0,0,0,0c0.6,0,1.1-0.5,1.1-1.1c0-0.1,0-0.2,0-0.2l-0.7-3.9l2.9-2.8c0.3-0.3,0.4-0.7,0.3-1.1
@@ -352,7 +352,7 @@
                         <span>MUTE</span>
                     </li>
                     <li>
-                        <svg x="0px" y="0px" viewBox="0 0 36 36">
+                        <svg x="0px" y="0px" viewBox="0 0 36 36" (click)="eventMain('showLeaderBoard')">
                             <g>
                                 <path class="st0" d="M13.6,9.4l-0.7,3.9c-0.1,0.4,0.1,0.8,0.4,1c0.2,0.1,0.4,0.2,0.6,0.2c0.2,0,0.3,0,0.5-0.1l3.5-1.9l3.5,1.9
                         c0.2,0.1,0.3,0.1,0.5,0.1c0,0,0,0,0,0c0.6,0,1.1-0.5,1.1-1.1c0-0.1,0-0.2,0-0.2l-0.7-3.9l2.9-2.8c0.3-0.3,0.4-0.7,0.3-1.1
@@ -382,9 +382,9 @@
         <ng-container *ngIf="case==='report'">
             <nb-card-body>
                 <!-- <test-game-report></test-game-report> -->
-                <button *ngIf="showUserAnswer" class="button" hero nbButton shape="semi-round" status="info">Show My
+                <!-- <button *ngIf="showUserAnswer" class="button" hero nbButton shape="semi-round" status="info">Show My
                     answer
-                </button>
+                </button> -->
                 <div class="col-md-12 buttons-footer" style="margin-top:5vh">
                     <div class=" row col-md-12">
                         <div class="col-md-3">

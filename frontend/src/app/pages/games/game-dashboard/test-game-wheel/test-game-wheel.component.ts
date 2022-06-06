@@ -307,7 +307,7 @@ export class TestGameWheelComponent extends BaseComponent implements OnInit, OnD
   }
   repotData = [];
   source: LocalDataSource = new LocalDataSource();
-  userName: any
+  userName: any;
   eventMain($event) {
     switch ($event) {
       case 'showLeaderBoard':
@@ -362,7 +362,10 @@ export class TestGameWheelComponent extends BaseComponent implements OnInit, OnD
         break;
     }
   }
-  pauseMusic = true;
+
+  goBackLeader() {
+    this.ngOnDestroy();
+  }
   stopMusic() {
     if (this.audio.paused) {
       this.audio.play();
@@ -370,6 +373,7 @@ export class TestGameWheelComponent extends BaseComponent implements OnInit, OnD
       this.audio.pause();
     }
   }
+
   shuffle(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
     while (0 !== currentIndex) {

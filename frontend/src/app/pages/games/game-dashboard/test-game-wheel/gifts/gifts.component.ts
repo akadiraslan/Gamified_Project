@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { bounceInAnimation, flipAnimation, tadaAnimation } from 'angular-animations';
+import { BaseComponent } from 'app/@components/base/base.component';
 import { GameService } from 'app/@core/mock/common/game.service';
 import { environment } from 'environments/environment';
 import { LocalDataSource } from 'ng2-smart-table';
@@ -15,7 +16,7 @@ import { LocalDataSource } from 'ng2-smart-table';
         tadaAnimation(),
     ],
 })
-export class GiftsComponent implements OnInit {
+export class GiftsComponent extends BaseComponent implements OnInit {
 
     @Input() gameData: any;
     baseUrl = environment.baseUrl + '/';
@@ -57,9 +58,11 @@ export class GiftsComponent implements OnInit {
     gifts = [];
     source: LocalDataSource = new LocalDataSource();
     constructor(private gameService: GameService) {
+        super();
     }
 
     ngOnInit(): void {
+        this.spinnerShow();
         this.gameService.getGifts().subscribe((data: any) => {
 
             this.gifts = data[0].gifts;
@@ -79,6 +82,7 @@ export class GiftsComponent implements OnInit {
         });
         setTimeout(() => {
             this.source.load(tableData);
+            this.spinnerHide();
         }, 1000);
     }
 
