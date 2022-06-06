@@ -74,8 +74,27 @@ export class ReportComponent extends BaseComponent implements OnInit, OnDestroy 
 
     ngOnInit(): void {
         this.spinnerShow();
+        const tableData = [];
         this.gameService.getAllReport().subscribe((data: any) => {
-            this.reportData = data;
+
+            data.forEach(element1 => {
+                let flag = true;
+                tableData.every(element2 => {
+                    if (element1.test_name === element2.test_name) {
+                        flag = false;
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                });
+                if (flag) {
+                    tableData.push(element1);
+                }
+            });
+
+            console.log(tableData);
+            this.reportData = tableData;
             console.log(data);
             this.spinnerHide();
             this.changeReportId(data[0].test_id);
