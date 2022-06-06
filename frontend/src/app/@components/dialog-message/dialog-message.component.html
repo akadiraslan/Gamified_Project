@@ -191,54 +191,14 @@
             translate}}</button>
     </nb-card-footer>
 </nb-card>
-
-<nb-card *ngIf="case === 'address'">
+<nb-card *ngIf="case === 'sameGame'">
     <nb-card-header>{{'warnings.Warning' | translate}}</nb-card-header>
     <nb-card-body>
-        {{'warnings.Do you want to remove this address' | translate}}
+        {{'warnings.You cant play this game again because you have played it before.' | translate}}
     </nb-card-body>
     <nb-card-footer>
         <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="dismiss()">{{'web.Dismiss
             Dialog' | translate}}
-        </button>
-        <button shape="semi-round" nbButton hero status="danger" (click)="removeFile()">{{'ACCOUNT.REMOVE_ADDRESS' |
-            translate}}</button>
-    </nb-card-footer>
-</nb-card>
-
-<nb-card *ngIf="case === 'creditCard'">
-    <nb-card-header>{{'warnings.Warning' | translate}}</nb-card-header>
-    <nb-card-body>
-        {{'warnings.Do you want to remove this address' | translate}}
-    </nb-card-body>
-    <nb-card-footer>
-        <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="dismiss()">{{'web.Dismiss
-            Dialog' | translate}}
-        </button>
-        <button shape="semi-round" nbButton hero status="danger" (click)="removeFile()">{{'PAYMENT.REMOVE_CREDIT_CARD' |
-            translate}}</button>
-    </nb-card-footer>
-</nb-card>
-
-<nb-card *ngIf="case === 'packageControl'">
-    <nb-card-header>{{'games.Scorm Package' | translate}}</nb-card-header>
-    <nb-card-body>
-        {{'warnings.Choose_scorm_package' | translate}}
-    </nb-card-body>
-    <nb-card-footer style="text-align: center;">
-        <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="dismiss()">{{'web.Close' |
-            translate}}
-        </button>
-    </nb-card-footer>
-</nb-card>
-<nb-card *ngIf="case === 'packageMessage'">
-    <nb-card-header>{{'games.Scorm Package' | translate}}</nb-card-header>
-    <nb-card-body>
-        {{stepMessage}}
-    </nb-card-body>
-    <nb-card-footer style="text-align: center;">
-        <button class="dismiss" nbButton hero status="info" shape="semi-round" (click)="dismiss()">{{'web.Close' |
-            translate}}
         </button>
     </nb-card-footer>
 </nb-card>

@@ -1,5 +1,10 @@
 {
     "web": {
-        "Next": "Next"
+        "Next": "Next",
+        "Dismiss Dialog": "Dismiss Dialog"
+    },
+    "warnings": {
+        "Warning": "Warning",
+        "You cant play this game again because you have played it before.": "You cant play this game again because you've played it before."
     }
 }

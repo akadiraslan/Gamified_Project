@@ -21,6 +21,9 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { GameService } from 'app/@core/mock/common/game.service';
 import { StorageService } from 'app/services/storage.service';
 import { LocalDataSource } from 'ng2-smart-table';
+import { DialogMessageComponent } from 'app/@components/dialog-message/dialog-message.component';
+import { NbDialogService } from '@nebular/theme';
+import { MessageService } from 'app/@core/mock/common/message.service';
 @Component({
   selector: 'test-game-wheel',
   styleUrls: ['./test-game-wheel.component.scss'],
@@ -153,23 +156,42 @@ export class TestGameWheelComponent implements OnInit {
       },
     },
   };
-  constructor(private gameService: GameService, private storageService: StorageService) { }
+  constructor(private gameService: GameService, private storageService: StorageService,
+    private dialogService: NbDialogService, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.getGames();
 
   }
   openGame(event) {
-    this.gameService.getTestService(event.id).subscribe((data: any) => {
-      console.log('data');
-      console.log(data);
-      this.gameData = data;
-      this.testGameId = event.id;
-      this.testName = event.name
-      this.case = 'main';
-      this.setGameSettings();
-      this.animate();
+    let flag = false;
+    this.gameService.getReport(event.id).subscribe((data: any) => {
+      data.forEach(dat => {
+        if (dat.user_id === this.storageService.getUserId())
+          flag = true;
+      });
+      if (!flag) {
+        this.gameService.getTestService(event.id).subscribe((data: any) => {
+          console.log('data');
+          console.log(data);
+          this.gameData = data;
+          this.testGameId = event.id;
+          this.testName = event.name
+          this.case = 'main';
+          this.setGameSettings();
+          this.animate();
+        });
+      } else {
+        this.messageService.sendDialogMessage('sameGame');
+        this.dialogService.open(DialogMessageComponent, {
+          context: {
+            submitMessage: 'Successfull',
+          },
+        });
+      }
+
     });
+
   }
   getGames() {
     this.gameService.getAllTestService().subscribe((data: any) => {
@@ -254,10 +276,6 @@ export class TestGameWheelComponent implements OnInit {
       this.allCat.push(cat);
       this.seed[index] = index;
     });
-    console.log('asdasdas');
-
-    console.log(this.newCatName);
-
 
     this.gameData['questions'].forEach(question => {
       for (let i = 0; i < this.allCat.length; i++) {

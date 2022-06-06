@@ -1,0 +1,10 @@
+{
+    "web": {
+        "Next": "İleri",
+        "Dismiss Dialog": "Dialogu Kapat"
+    },
+    "warnings": {
+        "Warning": "Uyarı",
+        "You cant play this game again because you have played it before.": "Bu oyunu daha önce oynadığınız için bir daha oynayamazsınız"
+    }
+}

@@ -49,7 +49,6 @@ export class DialogMessageComponent extends BaseComponent implements OnInit {
   newPage() {
     this.ref.close(this.controlNewPage);
     this.controlNewPage = 1;
-
   }
 
   dismiss() {
