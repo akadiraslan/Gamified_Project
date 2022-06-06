@@ -284,7 +284,7 @@ export class TestGameWheelComponent implements OnInit {
   }
   repotData = [];
   source: LocalDataSource = new LocalDataSource();
-
+  userName: any
   eventMain($event) {
     switch ($event) {
       case 'showLeaderBoard':
@@ -295,6 +295,7 @@ export class TestGameWheelComponent implements OnInit {
           console.log(data);
           data.forEach(dat => {
             this.gameService.getUserName(dat.user_id).subscribe((userNam: any) => {
+              this.userName = userNam.name;
               this.repotData.push({
                 name: userNam.name, score: dat.score, email: userNam.email
               })

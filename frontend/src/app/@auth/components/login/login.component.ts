@@ -103,7 +103,7 @@ export class NgxLoginComponent extends BaseComponent implements OnInit {
                 this.storageService.clearStorage();
                 this.storageService.setUserId(data.id);
 
-                this.router.navigateByUrl('/dashboard');
+                this.router.navigateByUrl('/games');
 
             }
             this.spinnerHide();
